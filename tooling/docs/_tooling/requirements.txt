@@ -1,7 +1,11 @@
 --extra-index-url https://pypi.org/simple/
 
 Sphinx
-sphinx-needs
+
+# At least 4.2.0, as it fixes a bug in combination with esbonio live preview:
+# https://github.com/useblocks/sphinx-needs/issues/1350
+sphinx-needs>=4.2.0
+
 pydata-sphinx-theme
 sphinx-design
 
