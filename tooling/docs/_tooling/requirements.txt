@@ -2,6 +2,7 @@
 
 Sphinx
 sphinx-needs
+sphinxcontrib-plantuml
 pydata-sphinx-theme
 sphinx-design
 
