@@ -1,19 +1,21 @@
+# *******************************************************************************
+# Copyright (c) 2024 Contributors to the Eclipse Foundation
+#
+# See the NOTICE file(s) distributed with this work for additional
+# information regarding copyright ownership.
+#
+# This program and the accompanying materials are made available under the
+# terms of the Apache License Version 2.0 which is available at
+# https://www.apache.org/licenses/LICENSE-2.0
+#
+# SPDX-License-Identifier: Apache-2.0
+# *******************************************************************************
 from sphinx.util.logging import SphinxLoggerAdapter
 from sphinx_needs.data import NeedsInfoType
 
 #######################################################################################
 #                       CUSTOM REUSABLE FUNCTIONS
 #######################################################################################
-
-prologPath = "docs/_extensions/prolog.inc"
-try:
-    with open(prologPath, "r") as prologFile:
-        # +1 is needed as the insert in the RST file a newline at the end.
-        rst_prolog_length = len(prologFile.readlines()) + 1
-except Exception as ex:
-    print("[ERROR:] While reading '{0!s}'.".format(prologPath))
-    print(ex)
-    rst_prolog_length = 0
 
 
 def check_option(
@@ -50,8 +52,7 @@ def check_option(
 
 def log_custom_warning(need: NeedsInfoType, log: SphinxLoggerAdapter, msg: str):
     if need["lineno"] is not None and need["docname"] is not None:
-        linenr_fixed = f"{int(need['lineno']) - rst_prolog_length}"
-        location = f"{need['docname']}.rst:{linenr_fixed}"
+        location = f"{need['docname']}.rst:{need['lineno']}"
     else:
         location = None
     # Note: passing the location as a string allows us to use readable relative paths,
