@@ -15,16 +15,32 @@ needs_types = [
     ##############################################################
     #  Process Metamodel
     ##############################################################
+    # Standards
     {
-        "directive": "workproduct",
-        "title": "Workproduct",
-        "prefix": "WP__",
+        "directive": "std_req",
+        "title": "Standard Requirement",
+        "prefix": "STD_REQ__",
         "req_opt": [
-            ("id", "^WP__[0-9a-z_]*$"),
-            ("status", "^(valid|draft)$"),
-            ("complies", "^(ISO26262_WP|ISO21434_WP|ASPICE-40_IIC)[0-9a-z_]*$"),
+            (
+                "id",
+                "^(STD_REQ_ISO26262|STD_REQ_ISO21434|STD_(G|B)P_ASPICE-40)__[0-9a-z_]*$",
+            ),
+            ("status", "^(valid)$"),
         ],
     },
+    {
+        "directive": "std_wp",
+        "title": "Standard Work Product",
+        "prefix": "STD_WP__",
+        "req_opt": [
+            (
+                "id",
+                "^(STD_WP_ISO26262|STD_WP_ISO21434|STD_(G|B)P_ASPICE-40)__[0-9a-z_]*$",
+            ),
+            ("status", "^(valid)$"),
+        ],
+    },
+    # Workflow
     {
         "directive": "workflow",
         "title": "Workflow",
@@ -32,9 +48,9 @@ needs_types = [
         "req_opt": [
             ("id", "^WF__[0-9a-z_]*$"),
             ("status", "^(valid|draft)$"),
-            ("input", "^WP__[0-9a-z_]*$"),
-            ("output", "^WP__[0-9a-z_]*$"),
-            ("contains", "^GD_(REQ|TEMP|CHKLST|GUIDL|METH)__[0-9a-z_]*$"),
+            ("input", "^WP__.*$"),
+            ("output", "^WP__.*$"),
+            ("contains", "^GD_(REQ|TEMP|CHKLST|GUIDL|METH)__.*$"),
             ("has", "^DOC_(GETSTRT|CONCEPT)__.*$"),
             ("approved_by", "^RL__.*$"),
             ("responsible", "^RL__.*$"),
@@ -43,6 +59,7 @@ needs_types = [
             ("supported_by", "^RL__.*$"),
         ],
     },
+    # Guidances
     {
         "directive": "gd_req",
         "title": "Process Requirements",
@@ -50,7 +67,10 @@ needs_types = [
         "req_opt": [
             ("id", "^GD_REQ__[0-9a-z_]*$"),
             ("status", "^(valid|draft)$"),
-            ("complies", "^(ISO26262_REQ|ISO21434_REQ|ASPICE-40_(G|B)P)[0-9a-z_]*$"),
+            (
+                "complies",
+                "^(STD_REQ_ISO26262|STD_REQ_ISO21434|STD_(G|B)P_ASPICE-40)__.*$",
+            ),
         ],
     },
     {
@@ -60,7 +80,10 @@ needs_types = [
         "req_opt": [
             ("id", "^GD_TEMP__[0-9a-z_]*$"),
             ("status", "^(valid|draft)$"),
-            ("complies", "^(ISO26262_REQ|ISO21434_REQ|ASPICE-40_(G|B)P)[0-9a-z_]*$"),
+            (
+                "complies",
+                "^(STD_REQ_ISO26262|STD_REQ_ISO21434|STD_(G|B)P_ASPICE-40)__.*$",
+            ),
         ],
     },
     {
@@ -70,7 +93,10 @@ needs_types = [
         "req_opt": [
             ("id", "^GD_CHKLST__[0-9a-z_]*$"),
             ("status", "^(valid|draft)$"),
-            ("complies", "^(ISO26262_REQ|ISO21434_REQ|ASPICE-40_(G|B)P)[0-9a-z_]*$"),
+            (
+                "complies",
+                "^(STD_REQ_ISO26262|STD_REQ_ISO21434|STD_(G|B)P_ASPICE-40)__[0-9a-z_]*$",
+            ),
         ],
     },
     {
@@ -80,7 +106,10 @@ needs_types = [
         "req_opt": [
             ("id", "^GD_GUIDL__[0-9a-z_]*$"),
             ("status", "^(valid|draft)$"),
-            ("complies", "^(ISO26262_REQ|ISO21434_REQ|ASPICE-40_(G|B)P)[0-9a-z_]*$"),
+            (
+                "complies",
+                "^(STD_REQ_ISO26262|STD_REQ_ISO21434|STD_(G|B)P_ASPICE-40)__.*$",
+            ),
         ],
     },
     {
@@ -90,27 +119,24 @@ needs_types = [
         "req_opt": [
             ("id", "^GD_METH__[0-9a-z_]*$"),
             ("status", "^(valid|draft)$"),
-            ("complies", "^(ISO26262_REQ|ISO21434_REQ|ASPICE-40_(G|B)P)[0-9a-z_]*$"),
+            (
+                "complies",
+                "^(STD_REQ_ISO26262|STD_REQ_ISO21434|STD_(G|B)P_ASPICE-40)__.*$",
+            ),
         ],
     },
+    # Score Workproduct
     {
-        "directive": "doc_concept",
-        "title": "Process Concept Definition",
-        "prefix": "DOC_CONCEPT__",
+        "directive": "workproduct",
+        "title": "Workproduct",
+        "prefix": "WP__",
         "req_opt": [
-            ("id", "^DOC_CONCEPT__[0-9a-z_]*$"),
+            ("id", "^WP__[0-9a-z_]*$"),
             ("status", "^(valid|draft)$"),
+            ("complies", "^(STD_WP_ISO26262|STD_WP_ISO21434|STD_IIC_ASPICE-40)__.*$"),
         ],
     },
-    {
-        "directive": "doc_getstrt",
-        "title": "Process Getting Startet",
-        "prefix": "DOC_GETSTRT__",
-        "req_opt": [
-            ("id", "^DOC_GETSTRT__[0-9a-z_]*$"),
-            ("status", "^(valid|draft)$"),
-        ],
-    },
+    # Role
     {
         "directive": "role",
         "title": "Role",
@@ -122,13 +148,23 @@ needs_types = [
             ("contains", "^RL__.*$"),
         ],
     },
+    # Documents
     {
-        "directive": "std_req",
-        "title": "Standard Requirement",
-        "prefix": "STD_REQ__",
+        "directive": "doc_concept",
+        "title": "Concept Definition",
+        "prefix": "DOC_CONCEPT__",
         "req_opt": [
-            ("id", "^STD_REQ__[0-9a-z_]*$"),
-            ("status", "^(valid)$"),
+            ("id", "^DOC_CONCEPT__[0-9a-z_]*$"),
+            ("status", "^(valid|draft)$"),
+        ],
+    },
+    {
+        "directive": "doc_getstrt",
+        "title": "Getting Startet",
+        "prefix": "DOC_GETSTRT__",
+        "req_opt": [
+            ("id", "^DOC_GETSTRT__[0-9a-z_]*$"),
+            ("status", "^(valid|draft)$"),
         ],
     },
     ##############################################################
@@ -143,7 +179,6 @@ needs_types = [
             ("id", "^DOC__[0-9a-z_]*$"),
             ("safety", "^(QM|ASIL_B|ASIL_D)$"),
             ("status", "^(valid|invalid)$"),
-            ("rationale", "^.+$"),
         ],
     },
     # Requirements
