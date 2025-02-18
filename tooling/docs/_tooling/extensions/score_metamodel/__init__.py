@@ -25,8 +25,8 @@ from .log import CheckLogger
 
 logger = logging.get_logger(__name__)
 
-local_checks: list[Callable[[NeedsInfoType, CheckLogger], None]] = []
-graph_checks: list[Callable[[dict[str, NeedsInfoType], CheckLogger], None]] = []
+local_checks: list[Callable[[Sphinx, NeedsInfoType, CheckLogger], None]] = []
+graph_checks: list[Callable[[Sphinx, dict[str, NeedsInfoType], CheckLogger], None]] = []
 
 
 def discover_checks():
@@ -42,14 +42,14 @@ def discover_checks():
         importlib.import_module(f"{package_name}.{module_name}", __package__)
 
 
-def local_check(func: Callable[[NeedsInfoType, CheckLogger], None]):
+def local_check(func: Callable[[Sphinx, NeedsInfoType, CheckLogger], None]):
     """Use this decorator to mark a function as a local check."""
     logger.debug(f"new local_check: {func}")
     local_checks.append(func)
     return func
 
 
-def graph_check(func: Callable[[dict[str, NeedsInfoType], CheckLogger], None]):
+def graph_check(func: Callable[[Sphinx, dict[str, NeedsInfoType], CheckLogger], None]):
     """Use this decorator to mark a function as a graph check."""
     logger.debug(f"new graph_check: {func}")
     graph_checks.append(func)
@@ -71,20 +71,17 @@ def _run_checks(app: Sphinx, exception: Exception | None) -> None:
     # graph of other needs.
     for need in needs_all_needs.values():
         for check in local_checks:
-            check(need, log)
+            check(app, need, log)
 
     # Graph-Based checks: These warnings require a graph of all other needs to
     # be checked.
     needs = needs_all_needs.values()
     for check in graph_checks:
-        check(needs, log)
+        check(app, needs, log)
 
     if log.has_warnings:
         log.warning("Some needs have issues. See the log for more information.")
         # TODO: exit code
-
-
-needs_types_list = []
 
 
 def load_metamodel_data():
@@ -105,6 +102,8 @@ def load_metamodel_data():
 
     types_dict = data.get("needs_types", {})
     links_dict = data.get("needs_extra_links", {})
+    # Default options by sphinx, sphinx-needs or anything else we need to account for
+    default_options_list = default_options()
 
     # Convert "types" from {directive_name: {...}, ...} to a list of dicts
     needs_types_list = []
@@ -122,16 +121,8 @@ def load_metamodel_data():
             one_type["style"] = directive_data["style"]
 
         # Store mandatory_options and optional_options directly as a dict
-        mandatory_options = directive_data.get("mandatory_options", {})
+        one_type["mandatory_options"] = directive_data.get("mandatory_options", {})
         one_type["opt_opt"] = directive_data.get("optional_options", {})
-
-        # Rename "id" to "opt_id" and "status" to "opt_status"
-        if "id" in mandatory_options:
-            mandatory_options["opt_id"] = mandatory_options.pop("id")
-        if "status" in mandatory_options:
-            mandatory_options["opt_status"] = mandatory_options.pop("status")
-
-        one_type["mandatory_options"] = mandatory_options
 
         # mandatory_links => "req_link"
         mand_links_yaml = directive_data.get("mandatory_links", {})
@@ -161,13 +152,56 @@ def load_metamodel_data():
     for directive_data in types_dict.values():
         all_options.update(directive_data.get("mandatory_options", {}).keys())
         all_options.update(directive_data.get("optional_options", {}).keys())
-    needs_extra_options = sorted(all_options)
+
+    # We have to remove all 'default options' from the extra options.
+    # As otherwise sphinx errors, due to an option being registered twice.
+    # They are still inside the extra options we extract to enable constraint checking via regex
+    needs_extra_options = sorted(all_options - set(default_options_list))
 
     return {
         "needs_types": needs_types_list,
         "needs_extra_links": needs_extra_links_list,
         "needs_extra_options": needs_extra_options,
     }
+
+
+def default_options() -> list[str]:
+    "Helper function to get a list of all default options defined by sphinx, sphinx-needs etc."
+    return [
+        "target_id",
+        "id",
+        "status",
+        "docname",
+        "lineno",
+        "type",
+        "lineno_content",
+        "doctype",
+        "content",
+        "type_name",
+        "type_color",
+        "type_style",
+        "title",
+        "full_title",
+        "layout",
+        "id_parent",
+        "id_complete",
+        "external_css",
+        "sections",
+        "section_name",
+        "type_prefix",
+        "constraints_passed",
+        "collapse",
+        "hide",
+        "delete",
+        "jinja_content",
+        "is_part",
+        "is_need",
+        "is_external",
+        "is_modified",
+        "modifications",
+        "has_dead_links",
+        "has_forbidden_dead_links",
+    ]
 
 
 def setup(app: Sphinx):
