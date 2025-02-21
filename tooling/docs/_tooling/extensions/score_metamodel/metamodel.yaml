@@ -11,8 +11,10 @@ needs_types:
     title: "Standard Requirement"
     prefix: "std_req__"
     mandatory_options:
-      id: "std_req__(iso26262|iso21434|isopas8926|aspice_40)__[0-9a-z_]*$"
+      id: "std_req__(iso26262|iso21434|isopas8926|aspice_40)__[0-9a-zA-Z_-]*$"
       status: "^(valid)$"
+    optional_links:
+      links: "^.*$"
 
   std_wp:
     title: "Standard Work Product"
