@@ -28,7 +28,9 @@ def check_id_format(app: Sphinx, need: NeedsInfoType, log: CheckLogger):
     # Split the string by underscores
     parts = need["id"].split("__")
 
-    if need["id"].startswith(("gd_", "wf__", "wp__")):
+    if need["id"].startswith(
+        ("gd_", "wf__", "wp__", "rl__", "stkh_req__", "tool_req__", "doc__")
+    ):
         if len(parts) != 2 and len(parts) != 3:
             msg = "expected to consisting of one of these 2 formats:`<Req Type>__<Abbreviations>` or `<Req Type>__<Abbreviations>__<Architectural Element>`."
             log.warning_for_option(need, "id", msg)
@@ -41,11 +43,11 @@ def check_id_format(app: Sphinx, need: NeedsInfoType, log: CheckLogger):
 @local_check
 def check_id_length(app: Sphinx, need: NeedsInfoType, log: CheckLogger):
     """
-    Validates that the requirement ID does not exceed the hard limit of 40 characters.
-    While the recommended limit is 30 characters, this check enforces a strict maximum of 40 characters.
-    If the ID exceeds 40 characters, a warning is logged specifying the actual length.
+    Validates that the requirement ID does not exceed the hard limit of 45 characters.
+    While the recommended limit is 30 characters, this check enforces a strict maximum of 45 characters.
+    If the ID exceeds 45 characters, a warning is logged specifying the actual length.
     ---
     """
-    if len(need["id"]) > 40:
-        msg = f"exceeds the maximum allowed length of 40 characters (current length: {len(need['id'])})."
+    if len(need["id"]) > 45:
+        msg = f"exceeds the maximum allowed length of 45 characters (current length: {len(need['id'])})."
         log.warning_for_option(need, "id", msg)
