@@ -119,8 +119,8 @@ class TestStandards:
         )
 
         need_2 = NeedsInfoType(
-            target_id="wp__POLICIES",
-            id="wp__POLICIES",
+            target_id="wp__policies",
+            id="wp__policies",
             type="workproduct",
             status="draft",
             tags="requirements_management",
@@ -158,8 +158,8 @@ class TestStandards:
         )
 
         need_2 = NeedsInfoType(
-            target_id="wp__POLICIES",
-            id="wp__POLICIES",
+            target_id="wp__policies",
+            id="wp__policies",
             type="workproduct",
             status="draft",
             complies=[
@@ -190,7 +190,7 @@ class TestStandards:
         need_1 = NeedsInfoType(
             target_id="Module Safety Plan",
             type="workproduct",
-            id="wp__MODULE_SAFETY_PLAN",
+            id="wp__module_safety_plan",
             status="valid",
             complies=[
                 "STD_WP__ISO26262__wp-2-653",
@@ -207,8 +207,8 @@ class TestStandards:
             type="workflow",
             id="WF__CR_MT_SAFETY_PLAN",
             status="draft",
-            input=["wp__PLATFORM_MGMT", "wp__ISSUE_TRACK_SYSTEM"],
-            output=["wp__MODULE_SAFETY_PLAN", "wp__PLATFORM_SAFETY_PLAN"],
+            input=["wp__platform_mgmt", "wp__issue_track_system"],
+            output=["wp__module_safety_plan", "wp__platform_safety_plan"],
             contains=[
                 "STD_REQ__ISO26262__rq-2-6461",
                 "STD_REQ__ISO26262__rq-2-6462",
@@ -237,7 +237,7 @@ class TestStandards:
         need_1 = NeedsInfoType(
             target_id="Module Safety Plan",
             type="workproduct",
-            id="wp__MODULE_SAFETY_PLAN",
+            id="wp__module_safety_plan",
             status="valid",
             relevant="PH_SPR_PLAN",
             complies=[
@@ -255,8 +255,8 @@ class TestStandards:
             type="workflow",
             id="WF__CR_MT_SAFETY_PLAN",
             status="draft",
-            input=["wp__PLATFORM_MGMT", "wp__ISSUE_TRACK_SYSTEM"],
-            output=["wp__PLATFORM_SAFETY_PLAN"],
+            input=["wp__platform_mgmt", "wp__issue_track_system"],
+            output=["wp__platform_safety_plan"],
             contains=[
                 "STD_REQ__ISO26262__rq-2-6461",
                 "STD_REQ__ISO26262__rq-2-6462",
@@ -289,7 +289,7 @@ class TestStandards:
         need_1 = NeedsInfoType(
             target_id="Module Safety Plan",
             type="workproduct",
-            id="wp__MODULE_SAFETY_PLAN",
+            id="wp__module_safety_plan",
             status="valid",
             complies=[
                 "STD_WP__ISO26262__wp-2-653",
@@ -306,8 +306,8 @@ class TestStandards:
             type="workflow",
             id="WF__CR_MT_SAFETY_PLAN",
             status="draft",
-            input=["wp__PLATFORM_MGMT", "wp__ISSUE_TRACK_SYSTEM"],
-            output=["wp__MODULE_SAFETY_PLAN", "wp__PLATFORM_SAFETY_PLAN"],
+            input=["wp__platform_mgmt", "wp__issue_track_system"],
+            output=["wp__module_safety_plan", "wp__platform_safety_plan"],
             contains=[
                 "STD_REQ__ISO26262__rq-2-6461",
                 "STD_REQ__ISO26262__rq-2-6462",
@@ -324,8 +324,8 @@ class TestStandards:
             type="workflow",
             id="WF__RV_AP_ContrRequest",
             status="valid",
-            input=["wp__CONT_REQUEST"],
-            output=["wp__MODULE_SAFETY_PLAN", "wp__CONT_REQUEST"],
+            input=["wp__cont_request"],
+            output=["wp__module_safety_plan", "wp__cont_request"],
             contains=[
                 "STD_REQ__ISO26262__rq-8-8411",
                 "STD_REQ__isoPAS8926__rq-4431",
@@ -432,8 +432,8 @@ class TestStandards:
         )
 
         need_3 = NeedsInfoType(
-            target_id="wp__POLICIES",
-            id="wp__POLICIES",
+            target_id="wp__policies",
+            id="wp__policies",
             status="draft",
             type="workproduct",
             complies=[
@@ -468,7 +468,7 @@ class TestStandards:
         need_1 = NeedsInfoType(
             target_id="Module Safety Plan",
             type="workproduct",
-            id="wp__MODULE_SAFETY_PLAN",
+            id="wp__module_safety_plan",
             status="valid",
             complies=[
                 "STD_WP__ISO26262__wp-2-653",
@@ -485,8 +485,8 @@ class TestStandards:
             type="workflow",
             id="WF__CR_MT_SAFETY_PLAN",
             status="draft",
-            input=["wp__PLATFORM_MGMT", "wp__ISSUE_TRACK_SYSTEM"],
-            output=["wp__MODULE_SAFETY_PLAN", "wp__PLATFORM_SAFETY_PLAN"],
+            input=["wp__platform_mgmt", "wp__issue_track_system"],
+            output=["wp__module_safety_plan", "wp__platform_safety_plan"],
             contains=[
                 "STD_REQ__ISO26262__rq-2-6461",
                 "STD_REQ__ISO26262__rq-2-6462",
@@ -501,7 +501,7 @@ class TestStandards:
         need_3 = NeedsInfoType(
             target_id="Module Safety Plan",
             type="workproduct",
-            id="wp__MODULE",
+            id="wp__module",
             status="valid",
             complies=[
                 "STD_WP__ISO26262__wp-2-653",
@@ -516,7 +516,7 @@ class TestStandards:
         need_4 = NeedsInfoType(
             target_id="Module Safety Plan",
             type="workproduct",
-            id="wp__MODULE_SAFETY",
+            id="wp__module_safety",
             complies=[
                 "STD_WP__ISO26262__wp-2-653",
                 "STD_WP__ISO26262__wp-8-853",
@@ -532,8 +532,8 @@ class TestStandards:
             type="workflow",
             id="WF__CR_MT_SAFETY",
             status="draft",
-            input=["wp__PLATFORM_MGMT", "wp__ISSUE_TRACK_SYSTEM"],
-            output=["wp__MODULE_SAFETY", "wp__PLATFORM_SAFETY_PLAN"],
+            input=["wp__platform_mgmt", "wp__issue_track_system"],
+            output=["wp__module_safety", "wp__platform_safety_plan"],
             contains=[
                 "STD_REQ__ISO26262__rq-2-6461",
                 "STD_REQ__ISO26262__rq-2-6462",
@@ -550,8 +550,8 @@ class TestStandards:
             type="workflow",
             id="WF__RV_AP_ContrRequest",
             status="valid",
-            input=["wp__CONT_REQUEST"],
-            output=["wp__MODULE_SAFETY", "wp__CONT_REQUEST"],
+            input=["wp__cont_request"],
+            output=["wp__module_safety", "wp__cont_request"],
             contains=[
                 "STD_REQ__ISO26262__rq-8-8411",
                 "STD_REQ__isoPAS8926__rq-4431",
@@ -732,7 +732,7 @@ class TestStandards:
         need_1 = NeedsInfoType(
             target_id="Module Safety Plan",
             type="workproduct",
-            id="wp__MODULE_SAFETY_PLAN",
+            id="wp__module_safety_plan",
             status="valid",
             complies=[
                 "STD_WP__ISO26262__wp-2-653",
@@ -749,8 +749,8 @@ class TestStandards:
             type="workflow",
             id="WF__CR_MT_SAFETY_PLAN",
             status="draft",
-            input=["wp__PLATFORM_MGMT", "wp__ISSUE_TRACK_SYSTEM"],
-            output=["wp__MODULE_SAFETY_PLAN", "wp__PLATFORM_SAFETY_PLAN"],
+            input=["wp__platform_mgmt", "wp__issue_track_system"],
+            output=["wp__module_safety_plan", "wp__platform_safety_plan"],
             contains=[
                 "STD_REQ__ISO26262__rq-2-6461",
                 "STD_REQ__ISO26262__rq-2-6462",
@@ -776,7 +776,7 @@ class TestStandards:
         need_1 = NeedsInfoType(
             target_id="Module Safety Plan",
             type="workproduct",
-            id="wp__MODULE_SAFETY_PLAN",
+            id="wp__module_safety_plan",
             status="valid",
             complies=[
                 "STD_WP__ISO26262__wp-2-653",
@@ -793,8 +793,8 @@ class TestStandards:
             type="workflow",
             id="WF__CSTD_REQ__MT_SAFETY_PLAN",
             status="draft",
-            input=["wp__PLATFORM_MGMT", "wp__ISSUE_TRACK_SYSTEM"],
-            output=["wp__MODULE_SAFETY_PLAN", "wp__PLATFORM_SAFETY_PLAN"],
+            input=["wp__platform_mgmt", "wp__issue_track_system"],
+            output=["wp__module_safety_plan", "wp__platform_safety_plan"],
             contains=[
                 "STD_REQ__ISO26262__rq-2-6461",
                 "STD_REQ__ISO26262__rq-2-6462",

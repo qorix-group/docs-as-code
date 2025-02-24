@@ -155,5 +155,5 @@ def check_extra_options(
 
     if extra_options:
         extra_options_str = ", ".join(f"`{option}`" for option in extra_options)
-        msg = f"has these extra options: {extra_options_str}."
-        log.warning_for_need(need, msg)
+        # msg = f"has these extra options: {extra_options_str}."
+        # log.warning_for_need(need, msg)
