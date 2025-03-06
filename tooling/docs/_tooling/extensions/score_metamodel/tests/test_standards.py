@@ -693,7 +693,7 @@ class TestStandards:
             security="NO",
             complies=[
                 "std_wp__iso26262__wp-2-551",
-                "std_wp__iso21434_wp-05-01",
+                "std_wp__isosae21434_wp-05-01",
             ],
             status="valid",
             satisfies=[
