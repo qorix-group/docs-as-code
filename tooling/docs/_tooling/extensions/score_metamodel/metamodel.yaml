@@ -140,9 +140,9 @@ needs_types:
     prefix: "doc__"
     mandatory_options:
       id: "^doc__[0-9a-z_]*$"
-      safety: "^(QM|ASIL_B|ASIL_D)$"
       status: "^(valid|draft|invalid)$"
     optional_options:
+      safety: "^(QM|ASIL_B|ASIL_D)$"
       realizes: "^wp__.+$"
   # Requirements
   stkh_req:
@@ -346,62 +346,56 @@ needs_types:
       status: "^(valid|invalid)$"
     mandatory_links:
       implements: "^feat_arc_int_op__.*$"
-
-  # Detailed Design
-  unit_dd_sta:
-    title: "Detailed Design Static View"
-    prefix: "unit_dd_sta__"
+  # Implementation
+  dd_sta:
+    title: "Static detailed design"
+    prefix: "dd_sta__"
     color: "#FEDCD2"
     style: "card"
     mandatory_options:
-      id: "^unit_dd_sta__[0-9a-z_]*$"
+      id: "^dd_sta__[0-9a-z_]*$"
       security: "^(YES|NO)$"
       safety: "^(QM|ASIL_B|ASIL_D)$"
       status: "^(valid|invalid)$"
     mandatory_links:
       implements: "^comp_req__.*$"
-
-  unit_dd_dyn:
-    title: "Detailed Design Dynamic View"
-    prefix: "unit_dd_dyn__"
+      satisfies: "^comp_arc_sta__.*$"
+    optional_links:
+      includes: "^sw_unit__.*$"
+  dd_dyn:
+    title: "Dynamic detailed design"
+    prefix: "dd_dyn__"
     color: "#FEDCD2"
     style: "card"
     mandatory_options:
-      id: "^unit_dd_dyn__[0-9a-z_]*$"
+      id: "^dd_dyn__[0-9a-z_]*$"
       security: "^(YES|NO)$"
       safety: "^(QM|ASIL_B|ASIL_D)$"
       status: "^(valid|invalid)$"
     mandatory_links:
       implements: "^comp_req__.*$"
-
-  unit_dd:
-    title: "Detailed Design Units"
-    prefix: "unit_dd__"
-    color: "#FEDCD2"
-    style: "card"
+      satisfies: "^comp_arc_sta__.*$"
+  sw_unit:
+    title: "Software unit"
+    prefix: "sw_unit__"
     mandatory_options:
-      id: "^unit_dd__[0-9a-z_]*$"
+      id: "^sw_unit__[0-9a-z_]*$"
       security: "^(YES|NO)$"
       safety: "^(QM|ASIL_B|ASIL_D)$"
       status: "^(valid|invalid)$"
-    mandatory_links:
-      implements: "^comp_req__.*$"
-
-  unit_dd_int:
-    title: "Detailed Design Interfaces"
-    prefix: "unit_dd_int__"
+  sw_unit_int:
+    title: "Software unit interfaces"
+    prefix: "sw_unit_int__"
     color: "#FEDCD2"
     style: "card"
     mandatory_options:
-      id: "^unit_dd_int__[0-9a-z_]*$"
+      id: "^sw_unit_int__[0-9a-z_]*$"
       security: "^(YES|NO)$"
       safety: "^(QM|ASIL_B|ASIL_D)$"
       status: "^(valid|invalid)$"
-    mandatory_links:
-      implements: "^comp_req__.*$"
 
 # Extra link types, which shall be available and allow need types to be linked to each other.
-# We use a dedicated linked type for each type of a conncetion, for instance from
+# We use a dedicated linked type for each type of a connection, for instance from
 # a specification to a requirement. This makes filtering and visualization of such connections
 # much easier, as we can sure the target need of a link has always a specific type.
 # Docs: https://sphinx-needs.readthedocs.io/en/latest/configuration.html#needs-extra-links
