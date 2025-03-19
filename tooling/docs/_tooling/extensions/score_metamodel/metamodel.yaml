@@ -39,7 +39,7 @@ needs_types:
     title: "Standard Requirement"
     prefix: "std_req__"
     mandatory_options:
-      id: "std_req__(iso26262|iso21434|isopas8926|aspice_40)__[0-9a-zA-Z_-]*$"
+      id: "std_req__(iso26262|isosae21434|isopas8926|aspice_40)__[0-9a-zA-Z_-]*$"
       status: "^(valid)$"
     optional_links:
       links: "^.*$"
@@ -48,7 +48,7 @@ needs_types:
     title: "Standard Work Product"
     prefix: "std_wp__"
     mandatory_options:
-      id: "std_wp__(iso26262|iso21434|isopas8926|aspice_40)__[0-9a-z_]*$"
+      id: "std_wp__(iso26262|isosae21434|isopas8926|aspice_40)__[0-9a-z_]*$"
       status: "^(valid)$"
   # Workflow
   workflow:
@@ -74,7 +74,7 @@ needs_types:
       id: "^gd_req__[0-9a-z_]*$"
       status: "^(valid|draft)$"
     optional_links:
-      complies: "^std_req__(iso26262|iso21434|isopas8926|aspice_40)__.*$"
+      complies: "^std_req__(iso26262|isosae21434|isopas8926|aspice_40)__.*$"
       satisfies: "^wf__.*$"
 
   gd_temp:
@@ -84,7 +84,7 @@ needs_types:
       id: "^gd_temp__[0-9a-z_]*$"
       status: "^(valid|draft)$"
     optional_links:
-      complies: "std_req__(iso26262|iso21434|isopas8926|aspice_40)__.*$"
+      complies: "std_req__(iso26262|isodae21434|isopas8926|aspice_40)__.*$"
 
   gd_chklst:
     title: "Process Checklist"
@@ -93,7 +93,7 @@ needs_types:
       id: "^gd_chklst__[0-9a-z_]*$"
       status: "^(valid|draft)$"
     optional_links:
-      complies: "std_req__(iso26262|iso21434|isopas8926|aspice_40)__.*$"
+      complies: "std_req__(iso26262|isodae21434|isopas8926|aspice_40)__.*$"
 
   gd_guidl:
     title: "Process Guideline"
@@ -102,7 +102,7 @@ needs_types:
       id: "^gd_guidl__[0-9a-z_]*$"
       status: "^(valid|draft)$"
     optional_links:
-      complies: "std_req__(iso26262|iso21434|isopas8926|aspice_40)__.*$"
+      complies: "std_req__(iso26262|isosae21434|isopas8926|aspice_40)__.*$"
 
   gd_method:
     title: "Process Method"
@@ -111,7 +111,7 @@ needs_types:
       id: "^gd_meth__[0-9a-z_]*$"
       status: "^(valid|draft)$"
     optional_links:
-      complies: "std_req__(iso26262|iso21434|isopas8926|aspice_40)__.*$"
+      complies: "std_req__(iso26262|isosae21434|isopas8926|aspice_40)__.*$"
   # Score Workproduct
   workproduct:
     title: "Workproduct"
@@ -120,7 +120,7 @@ needs_types:
       id: "^wp__[0-9a-z_]*$"
       status: "^(valid|draft)$"
     optional_links:
-      complies: "std_(wp__iso26262|wp__iso21434|wp__isopas8926|iic_aspice_40)__.*$"
+      complies: "std_(wp__iso26262|wp__isosae21434|wp__isopas8926|iic_aspice_40)__.*$"
   # Role
   role:
     title: "Role"
