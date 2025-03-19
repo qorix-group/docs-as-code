@@ -10,7 +10,7 @@
 #
 # SPDX-License-Identifier: Apache-2.0
 # *******************************************************************************
-from sphinx.application import Sphinx
+# from sphinx.application import Sphinx
 from sphinx_needs.data import NeedsInfoType
 
 # from score_metamodel import (
@@ -79,15 +79,16 @@ def get_compliance_wp_needs(needs) -> set:
     }
 
 
-#                    ╭──────────────────────────────────────────────────────────────────────────────╮
-#                    │                             Disabled temporarly                              │
-#                    ╰──────────────────────────────────────────────────────────────────────────────╯
+#        ╭─────────────────────────────────────────────────────────────────────────────╮
+#        │                             Disabled temporarly                             │
+#        ╰─────────────────────────────────────────────────────────────────────────────╯
 # @graph_check
 # def check_all_standard_req_linked_item_via_the_compliance_req(
 #     app: Sphinx, needs: list[NeedsInfoType], log: CheckLogger
 # ):
 #     """
-#     Checks if all standard requirements are linked to an item via the compliance_req tag.
+#     Checks if all standard requirements are linked to an item via the compliance_req
+#     tag.
 #     Logs a warning for each unlinked standard requirement.
 #     """
 #     standards_needs = get_standards_needs(needs)
@@ -95,7 +96,10 @@ def get_compliance_wp_needs(needs) -> set:
 #
 #     for need in standards_needs.values():
 #         if need["id"] not in compliance_req_needs:
-#             msg = f"Standard requirement `{need['id']}` is not linked to at least one item via the complies tag. \n"
+#             msg = (
+#                   f"Standard requirement `{need['id']}` is not linked to at least "
+#                   f"one item via the complies tag. \n"
+#                   )
 #             log.warning_for_option(need, "id", msg)
 #
 # @graph_check
@@ -112,8 +116,8 @@ def get_compliance_wp_needs(needs) -> set:
 #     for need in standards_workproducts.values():
 #         if need["id"] not in compliance_wp_needs:
 #             msg = (
-#                 f"Standard workproduct `{need['id']}` is not linked to at least one item "
-#                 f"via the complies tag. \n"
+#                 f"Standard workproduct `{need['id']}` is not linked to at least one"
+#                 f" item via the complies tag. \n"
 #             )
 #             log.warning_for_option(need, "id", msg)
 #
@@ -136,9 +140,9 @@ def get_compliance_wp_needs(needs) -> set:
 #     }
 #
 #     # Iterate over workflows and update the counts and workflows
-#     for workflow_id, workflow in all_workflows.items():
+#     for workflow in all_workflows.values():
 #         for output in workflow["output"]:
-#             # If the workproduct is in the analysis, increment its count and add the workflow_id
+#             # Increment count and add workflow_id if workproduct is in analysis
 #             if output in workproduct_analysis:
 #                 workproduct_analysis[output]["count"] += 1
 #                 workproduct_analysis[output]["workflows"].append(workflow_id)
@@ -157,18 +161,23 @@ def get_compliance_wp_needs(needs) -> set:
 #                 workflows_str = ", ".join(
 #                     f"`{workflow}`" for workflow in workflows
 #                 )  # Join workflow IDs into a string
-#                 msg = f"is contained in {count} workflows: {workflows_str}, which is incorrect. \n"
+#                 msg = (
+#                       f"is contained in {count} workflows: {workflows_str},"
+#                       f"which is incorrect. \n"
+#                        )
 #                 log.warning_for_need(workproduct, msg)
 #
 #
-#                    ╭──────────────────────────────────────────────────────────────────────────────╮
-#                    │                            END OF TEMP DISABLING                             │
-#                    ╰──────────────────────────────────────────────────────────────────────────────╯
+#        ╭─────────────────────────────────────────────────────────────────────────────╮
+#        │                            END OF TEMP DISABLING                            │
+#        ╰─────────────────────────────────────────────────────────────────────────────╯
 
 
 def my_pie_linked_standard_requirements(needs, results, **kwargs):
     """
-    Function to render the chart of check for standard requirements linked to at least an item via compliance-gd.
+    Function to render the chart of check for standard requirements linked
+    to at least an item via compliance-gd.
+
     Passed arguments can be accessed via kwargs['arg<position>']
     See: https://sphinx-needs.readthedocs.io/en/latest/filter.html#arguments
     """
@@ -197,7 +206,9 @@ def my_pie_linked_standard_requirements(needs, results, **kwargs):
 
 def my_pie_linked_standard_workproducts(needs, results, **kwargs):
     """
-    Function to render the chart of check for standard workproducts linked to at least an item via compliance-wp.
+    Function to render the chart of check for standar workproducts linked
+    to at least an item via compliance-wp.
+
     Passed arguments can be accessed via kwargs['arg<position>']
     See: https://sphinx-needs.readthedocs.io/en/latest/filter.html#arguments
     """
@@ -227,7 +238,9 @@ def my_pie_linked_standard_workproducts(needs, results, **kwargs):
 
 def my_pie_workproducts_contained_in_exactly_one_workflow(needs, results, **kwargs):
     """
-    Function to render the chart of check for workproducts that are contained in exactly one workflow, the not connected once and the once that are connected to multiple workflows.
+    Function to render the chart of check for workproducts that are contained
+    in exactly one workflow, the not connected once and the once
+    that are connected to multiple workflows.
     """
     all_workflows = get_workflows(needs)
     all_workproducts = get_workproducts(needs)
@@ -236,9 +249,9 @@ def my_pie_workproducts_contained_in_exactly_one_workflow(needs, results, **kwar
     workproduct_analysis = {wp["id"]: {"count": 0} for wp in all_workproducts.values()}
 
     # Iterate over workflows and update the counts and workflows
-    for workflow_id, workflow in all_workflows.items():
+    for workflow in all_workflows.values():
         for output in workflow["output"]:
-            # If the workproduct is in the analysis, increment its count and add the workflow_id
+            # Increment count and add workflow_id if workproduct is in analysis
             if output in workproduct_analysis:
                 workproduct_analysis[output]["count"] += 1
 
