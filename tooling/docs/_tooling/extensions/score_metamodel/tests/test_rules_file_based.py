@@ -82,7 +82,9 @@ def sphinx_app_setup(
 @dataclass
 class WarningInfo:
     #### Class to hold information about warnings
-    # The class contains the line number and the expected and not expected warnings.
+    # The class contains the filename of the rst file,
+    # line number and the expected and not expected warnings.
+    filename: str = ""
     lineno: int = 0
     expected: list[str] = field(default_factory=list)
     not_expected: list[str] = field(default_factory=list)
@@ -106,6 +108,7 @@ def extract_test_data(rst_file: Path) -> list[WarningInfo] | None:
         for no, line in enumerate(f, start=1):
             if line.startswith(".. "):  # Beginning of new need
                 if test_info:
+                    test_info.filename = rst_file.name
                     test_info.lineno = no
                     statements.append(test_info)
                 test_info = None
@@ -124,6 +127,20 @@ def extract_test_data(rst_file: Path) -> list[WarningInfo] | None:
         return statements
 
 
+def warning_matches(
+    warning_info: WarningInfo, expected_message: str, warnings: list[str]
+) -> bool:
+    ### Checks if any element of the warning list is includes the given warning info.
+    # It returns True if found otherwise False.
+    for warning in warnings:
+        if (
+            f"{warning_info.filename}:{str(warning_info.lineno)}" in warning
+            and expected_message in warning
+        ):
+            return True
+    return False
+
+
 @pytest.mark.parametrize("rst_file", RST_FILES)
 def test_check_rules(
     rst_file: str, sphinx_app_setup: Callable[[Path], SphinxTestApp]
@@ -137,14 +154,13 @@ def test_check_rules(
     app: SphinxTestApp = sphinx_app_setup(RST_DIR / rst_file)
     os.chdir(app.srcdir)  # Change working directory to the source directory
     app.build()
-    warn_text: str = app.warning.getvalue()
+    warnings = app.warning.getvalue().splitlines()
     for test in test_data:
         for expected in test.expected:
-            assert (
-                f"{Path(rst_file).name}:{test.lineno}: WARNING: {expected}" in warn_text
-            ), f"Expected warning: {[expected]} not found"
+            assert warning_matches(
+                test, expected, warnings
+            ), f"Expected warning: {expected} not found"
         for not_expected in test.not_expected:
-            assert (
-                f"{Path(rst_file).name}:{test.lineno}: WARNING: {not_expected}"
-                not in warn_text
-            ), f"Unexpected warning: {[not_expected]} found"
+            assert not warning_matches(
+                test, not_expected, warnings
+            ), f"Unexpected warning: {not_expected} found"
