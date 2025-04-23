@@ -103,6 +103,12 @@ def _run_checks(app: Sphinx, exception: Exception | None) -> None:
     if log.has_warnings:
         log.warning("Some needs have issues. See the log for more information.")
 
+    if log.has_infos:
+        log.info(
+            "Some needs have issues related to the new checks. See the log for more information."
+        )
+        # TODO: exit code
+
 
 def load_metamodel_data():
     """
