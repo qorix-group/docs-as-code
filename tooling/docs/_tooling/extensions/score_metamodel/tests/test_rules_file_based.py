@@ -55,7 +55,7 @@ def index_file() -> Callable[[Path], str]:
         # that refers to the given rst file.
         index_rst: str = f"""
 .. toctree::
-   {rst_file.stem}
+   {rst_file.relative_to(RST_DIR)}
 """
         return index_rst
 
@@ -70,7 +70,11 @@ def sphinx_app_setup(
     def _create_app(rst_file: Path) -> SphinxTestApp:
         ### Create a SphinxTestApp instance.
         # The source directory is set to the temporary directory.
-        shutil.copy(rst_file, sphinx_base_dir)
+        # Create folder structure of rst file in the temporary directory.
+        rst_folder = sphinx_base_dir / rst_file.parent.relative_to(RST_DIR)
+        rst_folder.mkdir(parents=True, exist_ok=True)
+        # Copy the rst file to the temporary directory.
+        shutil.copy(str(rst_file), rst_folder)
         index_context: str = index_file(rst_file)
         (sphinx_base_dir / "index.rst").write_text(index_context)
         app: SphinxTestApp = SphinxTestApp(
@@ -174,7 +178,7 @@ def test_rst_files(
             "Unable to extract test data from the rst file: "
             f"{rst_file}. Please check the file for the correct format."
         )
-
+    print(f"RST Data: {rst_data}")
     app: SphinxTestApp = sphinx_app_setup(RST_DIR / rst_file)
     os.chdir(app.srcdir)  # Change working directory to the source directory
 
@@ -184,6 +188,7 @@ def test_rst_files(
 
     # Collect the warnings
     warnings = app.warning.getvalue().splitlines()
+    print(f"Warnings: {warnings}")
 
     # Check if the expected warnings are present
     for warning_info in rst_data.warning_infos:

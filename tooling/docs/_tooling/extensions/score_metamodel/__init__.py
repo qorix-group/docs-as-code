@@ -86,10 +86,12 @@ def _run_checks(app: Sphinx, exception: Exception | None) -> None:
     def is_check_enabled(check: local_check_function | graph_check_function):
         return not checks_filter or check.__name__ in checks_filter
 
+    enabled_local_checks = [c for c in local_checks if is_check_enabled(c)]
+
     # Need-Local checks: checks which can be checked file-local, without a
     # graph of other needs.
     for need in needs_all_needs.values():
-        for check in [c for c in local_checks if is_check_enabled(c)]:
+        for check in enabled_local_checks:
             logger.info(f"Running local check {check} for need {need['id']}")
             check(app, need, log)
 
