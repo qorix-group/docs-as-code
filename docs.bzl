@@ -218,7 +218,6 @@ def _docs(name = "docs", format = "html", external_needs_deps = list(), external
     pkg_files(
         name = "html_files" + target_suffix,
         srcs = [":html" + target_suffix],
-        renames = {"html": ""},
     )
 
     pkg_tar(
