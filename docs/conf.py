@@ -38,6 +38,8 @@ extensions = [
     "score_draw_uml_funcs",
     "score_source_code_linker",
     "score_layout",
+    "sphinx_rust",
+    "score_rust_needs_extractor",
 ]
 
 myst_enable_extensions = ["colon_fence"]

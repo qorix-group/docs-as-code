@@ -113,6 +113,7 @@ py_library(
         "@score_docs_as_code//src/extensions/score_layout",
         "@score_docs_as_code//src/extensions/score_metamodel",
         "@score_docs_as_code//src/extensions/score_source_code_linker",
+        "@score_docs_as_code//src/extensions/score_rust_needs_extractor",
         "@score_docs_as_code//src/find_runfiles",
     ],
     visibility = ["//visibility:public"],
