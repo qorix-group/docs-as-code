@@ -142,7 +142,6 @@ def check_metamodel_graph(
         apply, eval = check[1].values()
         # Get all needs that match the selection criteria
         selected_needs = get_need_selection(needs_local, apply, log)
-        print(f"Selected needs: {selected_needs}")
 
         for need in selected_needs:
             for parent_relation in list(eval.keys()):
