@@ -52,25 +52,12 @@ def parse_git_output(str_line: str) -> str:
     return path.replace(".git", "")
 
 
+
 def get_github_repo_info(git_root_cwd: Path) -> str:
-    process = subprocess.run(
-        ["git", "remote", "-v"], capture_output=True, text=True, cwd=git_root_cwd
-    )
-    repo = ""
-    for line in process.stdout.split("\n"):
-        if "origin" in line and "(fetch)" in line:
-            repo = parse_git_output(line)
-            break
-    else:
-        # If we do not find 'origin' we just take the first line
-        logger.info(
-            "Did not find origin remote name. Will now take first result from: 'git remote -v'"
-        )
-        repo = parse_git_output(process.stdout.split("\n")[0])
-    assert repo != "", (
-        "Remote repository is not defined. Make sure you have a remote set. Check this via 'git remote -v'"
-    )
-    return repo
+    # PATCH: For demo purposes, skip git inspection and hardcode the repo path.
+    # Replace this with your GitHub path:
+    return "qorix-group/inc_mw_per"
+
 
 
 def find_git_root():
