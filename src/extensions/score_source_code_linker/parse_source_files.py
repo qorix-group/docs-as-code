@@ -78,15 +78,8 @@ def find_git_root():
     This is copied from 'find_runfiles' as the import does not work for some reason.
     This should be fixed.
     """
-    git_root = Path.cwd().resolve()
-    while not (git_root / ".git").exists():
-        git_root = git_root.parent
-        if git_root == Path("/"):
-            sys.exit(
-                "Could not find git root. Please run this script from the "
-                "root of the repository."
-            )
-    return git_root
+
+    return Path.cwd().resolve()
 
 
 def get_git_hash(file_path: str) -> str:
