@@ -72,6 +72,25 @@
 .. stkh_req:: Parent requirement
    :id: stkh_req__abcd
 
+.. List of elements which an attribute safety. Preparation of a test that actually could be need to ensure that ASIL_D is not used.
+.. doc__
+.. stkh_req__
+.. feat_req__
+.. comp_req__
+.. tool_req__
+.. aou_req__
+.. feat_arc_sta__
+.. feat_arc_dyn__
+.. logic_arc_int__
+.. logic_arc_int_op__
+.. comp_arc_sta__
+.. comp_arc_dyn__
+.. real_arc_int__
+.. real_arc_int_op__
+.. dd_sta__
+.. dd_dyn__
+.. sw_unit__
+
 
 .. Test if the `sufficient` option for Safety Analysis (FMEA and DFA) follows the pattern `^(yes|no)$`
 #EXPECT: feat_saf_fmea__test__bad_1.sufficient (QM): does not follow pattern `^(yes|no)$`.
