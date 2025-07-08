@@ -39,7 +39,8 @@ extensions = [
     "score_source_code_linker",
     "score_layout",
     "sphinxcontrib_rust",
-    "sphinx-rust",
+    "sphinx_rust",
+    "sphinxcontrib.test_reports",
 ]
 
 myst_enable_extensions = ["colon_fence"]

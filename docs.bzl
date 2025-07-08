@@ -144,6 +144,7 @@ def _incremental(incremental_name = "incremental", live_name = "live_preview", s
             "EXTERNAL_NEEDS_INFO": json.encode(external_needs_def),
             "ACTION": "incremental",
         },
+        package_collisions = "warning",
     )
 
     py_binary(
@@ -158,6 +159,7 @@ def _incremental(incremental_name = "incremental", live_name = "live_preview", s
             "EXTERNAL_NEEDS_INFO": json.encode(external_needs_def),
             "ACTION": "live_preview",
         },
+        package_collisions = "warning",
     )
 
 def _ide_support():
