@@ -516,7 +516,7 @@ needs_types:
       status: ^(valid|invalid)$
     mandatory_links:
       mitigates: ^(feat_req__.*|aou_req__.*)$
-      verifies: ^feat_arc_dyn__[0-9a-z_]*$
+      verifies: ^feat_arc_sta__[0-9a-z_]*$
     optional_links:
       mitigation_issue: ^https://github.com/.*$
 
@@ -531,7 +531,7 @@ needs_types:
       status: ^(valid|invalid)$
     mandatory_links:
       mitigates: ^(feat_req__.*|aou_req__.*)$
-      verifies: ^feat_arc_dyn__[0-9a-z_]*$
+      verifies: ^feat_arc_sta__[0-9a-z_]*$
     optional_links:
       mitigation_issue: ^https://github.com/.*$
 
@@ -546,7 +546,7 @@ needs_types:
       status: ^(valid|invalid)$
     mandatory_links:
       mitigates: ^(comp_req__.*|aou_req__.*)$
-      verifies: ^comp_arc_dyn__[0-9a-z_]*$
+      verifies: ^comp_arc_sta__[0-9a-z_]*$
     optional_links:
       mitigation_issue: ^https://github.com/.*$
 
