@@ -515,10 +515,10 @@ needs_types:
       sufficient: ^(yes|no)$
       status: ^(valid|invalid)$
     mandatory_links:
-      mitigates: ^(feat_req__.*|aou_req__.*)$
       verifies: ^feat_arc_sta__[0-9a-z_]*$
     optional_links:
       mitigation_issue: ^https://github.com/.*$
+      mitigates: ^(feat_req__.*|aou_req__.*)$
 
   feat_saf_dfa:
     title: DFA
