@@ -512,7 +512,7 @@ needs_types:
       id: ^feat_plat_saf_dfa__[0-9a-z_]+$
       violation_id: ^.*$
       violation_cause: ^.*$
-      violation_applicable: ^(yes|no)$
+      sufficient: ^(yes|no)$
       status: ^(valid|invalid)$
     optional_options:
       sufficient: ^(yes|no)$
