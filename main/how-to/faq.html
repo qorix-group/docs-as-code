@@ -53,7 +53,7 @@
 
     <script src="../_static/jquery.js?v=5d32c60e"></script>
     <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-    <script src="../_static/documentation_options.js?v=5929fcd5"></script>
+    <script src="../_static/documentation_options.js?v=7f41d439"></script>
     <script src="../_static/doctools.js?v=9bcbadda"></script>
     <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../_static/design-tabs.js?v=f930bc37"></script>
@@ -72,8 +72,8 @@
         </script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Commands" href="commands.html" />
-    <link rel="prev" title="How To" href="index.html" />
+    <link rel="next" title="Reference Other Modules" href="other_modules.html" />
+    <link rel="prev" title="Write Documentation" href="write_docs.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   <meta name="docsearch:version" content="0.1" />
@@ -160,15 +160,22 @@
 
 
 <li class="nav-item ">
-  <a class="nav-link nav-internal" href="../internals/index.html">
-    Internals
+  <a class="nav-link nav-internal" href="../reference/index.html">
+    Reference
   </a>
 </li>
 
 
 <li class="nav-item ">
-  <a class="nav-link nav-internal" href="../requirements/index.html">
-    Requirements
+  <a class="nav-link nav-internal" href="../concepts/index.html">
+    Concepts
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../internals/index.html">
+    Internals
   </a>
 </li>
 
@@ -289,15 +296,22 @@
 
 
 <li class="nav-item ">
-  <a class="nav-link nav-internal" href="../internals/index.html">
-    Internals
+  <a class="nav-link nav-internal" href="../reference/index.html">
+    Reference
   </a>
 </li>
 
 
 <li class="nav-item ">
-  <a class="nav-link nav-internal" href="../requirements/index.html">
-    Requirements
+  <a class="nav-link nav-internal" href="../concepts/index.html">
+    Concepts
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../internals/index.html">
+    Internals
   </a>
 </li>
 
@@ -365,9 +379,13 @@
      aria-label="Section Navigation">
   <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
   <div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">FAQ</a></li>
-<li class="toctree-l1"><a class="reference internal" href="commands.html">Commands</a></li>
+<li class="toctree-l1"><a class="reference internal" href="get_started.html">Getting started</a></li>
 <li class="toctree-l1"><a class="reference internal" href="setup.html">Setup</a></li>
+<li class="toctree-l1"><a class="reference internal" href="write_docs.html">Write Documentation</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">FAQ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="other_modules.html">Reference Other Modules</a></li>
+<li class="toctree-l1"><a class="reference internal" href="source_to_doc_links.html">Reference Docs in Source Code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="test_to_doc_links.html">Reference Docs in Tests</a></li>
 </ul>
 </div>
 </nav></div>
@@ -458,6 +476,12 @@ esbonio (settings.json).</p>
 <p>If this does not work, please use the live preview feature: <code class="docutils literal notranslate"><span class="pre">bazel</span> <span class="pre">run</span> <span class="pre">//:live_preview</span></code>.
 This provides immediate metamodel feedback (although only on the console) and
 IDE-agnostic preview capabilities.</p>
+<p>Another option is to use the <a class="reference external" href="https://ubcode.useblocks.com">ubCode</a> extension for
+VS Code. It provides lightning-fast linting, formatting, previewing, navigation and
+analytical features for large Sphinx and Sphinx-Needs projects.
+The <code class="docutils literal notranslate"><span class="pre">ubproject.toml</span></code> configuration file gets generated automatically when a Sphinx
+build is running once. The file can safely be committed to the repository to enable
+IDE support without requiring a Sphinx build first.</p>
 <section id="esbonio">
 <h3>Esbonio<a class="headerlink" href="#esbonio" title="Link to this heading">#</a></h3>
 <p>Known issues:</p>
@@ -471,10 +495,11 @@ installation.</p>
 </ul>
 </section>
 <section id="ubc">
-<h3>uBc<a class="headerlink" href="#ubc" title="Link to this heading">#</a></h3>
-<p>Currently, uBc is not aware of our metamodel. As a result, checks and auto-completion
+<h3>ubc<a class="headerlink" href="#ubc" title="Link to this heading">#</a></h3>
+<p>Currently, ubc is not aware of our metamodel. As a result, checks and auto-completion
 features are not available.</p>
-<p>We plan to explore improvements in this area in the future together with useblocks.</p>
+<p>We plan to explore improvements in this area in the future together with useblocks.
+These features are on the immediate roadmap.</p>
 </section>
 </section>
 <section id="do-we-need-to-write-custom-python-code-for-every-metamodel-check">
@@ -531,20 +556,20 @@ tests (tests within the next days).</p>
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="index.html"
+       href="write_docs.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">How To</p>
+        <p class="prev-next-title">Write Documentation</p>
       </div>
     </a>
     <a class="right-next"
-       href="commands.html"
+       href="other_modules.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Commands</p>
+        <p class="prev-next-title">Reference Other Modules</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -570,7 +595,7 @@ tests (tests within the next days).</p>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#why-is-docs-as-code-so-slow">Why is docs-as-code so slow?</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ide-support-auto-completion-metamodel-checks-preview-lsp-capabilities">IDE support (auto completion, metamodel checks, preview, LSP capabilities)</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#esbonio">Esbonio</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ubc">uBc</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ubc">ubc</a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#do-we-need-to-write-custom-python-code-for-every-metamodel-check">Do we need to write custom Python code for every Metamodel check?</a></li>
@@ -588,7 +613,7 @@ tests (tests within the next days).</p>
 
   
   <div class="tocsection editthispage">
-    <a href="https://github.com/qorix-group/docs-as-code/edit/main/docs/how-to/faq.md">
+    <a href="https://github.com/qorix-group/docs-as-code/edit/main/'docs'/how-to/faq.md">
       <i class="fa-solid fa-pencil"></i>
       
       
@@ -599,15 +624,6 @@ tests (tests within the next days).</p>
     </a>
   </div>
 </div>
-
-  <div class="sidebar-secondary-item">
-  <div role="note" aria-label="source link">
-    <h3>This Page</h3>
-    <ul class="this-page-menu">
-      <li><a href="../_sources/how-to/faq.md.txt"
-            rel="nofollow">Show Source</a></li>
-    </ul>
-   </div></div>
 
 </div></div>
               
