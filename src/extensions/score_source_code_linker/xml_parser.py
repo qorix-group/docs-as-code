@@ -170,6 +170,16 @@ def find_xml_files(dir: Path) -> list[Path]:
             xml_paths.append(Path(os.path.join(root, test_file_name)))
     return xml_paths
 
+def find_test_folder(base_path: Path|None = None) -> Path|None:
+    ws_root = base_path if base_path is not None else find_ws_root()
+    assert ws_root is not None
+    if os.path.isdir(ws_root/"tests-report"):
+        return ws_root / "tests-report" 
+    if os.path.isdir(ws_root/"bazel-testlogs"):
+        return ws_root / "bazel-testlogs"
+    logger.info("could not find tests-report or bazel-testlogs to parse testcases")
+    return None
+
 
 def run_xml_parser(app: Sphinx, env: BuildEnvironment):
     """
@@ -177,10 +187,11 @@ def run_xml_parser(app: Sphinx, env: BuildEnvironment):
     building testcase needs.
     It gets called from the source_code_linker __init__
     """
-    ws_root = find_ws_root()
-    assert ws_root is not None
-    bazel_testlogs = ws_root / "bazel-testlogs"
-    xml_file_paths = find_xml_files(bazel_testlogs)
+    testlogs_dir = find_test_folder()
+    # early return
+    if testlogs_dir is None:
+        return
+    xml_file_paths = find_xml_files(testlogs_dir)
     test_case_needs = build_test_needs_from_files(app, env, xml_file_paths)
     # Saving the test case needs for cache
     store_data_of_test_case_json(
