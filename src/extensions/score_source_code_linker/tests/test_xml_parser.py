@@ -17,9 +17,9 @@ Once we enable those we will need to change the tests
 """
 
 import xml.etree.ElementTree as ET
+from collections.abc import Callable
 from pathlib import Path
 from typing import Any
-from collections.abc import Callable
 
 import pytest
 
@@ -31,49 +31,58 @@ from src.extensions.score_source_code_linker.testlink import DataOfTestCase
 
 
 # Unsure if I should make these last a session or not
+def _write_test_xml(
+    path: Path,
+    name: str,
+    result: str = "",
+    props: dict[str, str] | None = None,
+    file: str = "",
+    line: int = 0,
+):
+    """Helper to create the XML structure for a test case."""
+    ts = ET.Element("testsuites")
+    suite = ET.SubElement(ts, "testsuite")
+
+    # Create testcase with attributes
+    tc_attrs = {"name": name}
+    if file:
+        tc_attrs["file"] = file
+    if line:
+        tc_attrs["line"] = str(line)
+    tc = ET.SubElement(suite, "testcase", tc_attrs)
+
+    # Add failure/skipped status
+    if result == "failed":
+        ET.SubElement(tc, "failure", {"message": "failmsg"})
+    elif result == "skipped":
+        ET.SubElement(tc, "skipped", {"message": "skipmsg"})
+
+    # Add properties if provided
+    if props:
+        props_el = ET.SubElement(tc, "properties")
+        for k, v in props.items():
+            ET.SubElement(props_el, "property", {"name": k, "value": v})
+
+    # Save to file
+    ET.ElementTree(ts).write(path, encoding="utf-8", xml_declaration=True)
+
+
 @pytest.fixture
 def tmp_xml_dirs(tmp_path: Path) -> Callable[..., tuple[Path, Path, Path]]:
     def _tmp_xml_dirs(test_folder: str = "bazel-testlogs") -> tuple[Path, Path, Path]:
-        root: Path = tmp_path / test_folder
-        dir1: Path = root / "with_props"
-        dir2: Path = root / "no_props"
-        dir1.mkdir(parents=True)
-        dir2.mkdir(parents=True)
+        root = tmp_path / test_folder
+        dir1, dir2 = root / "with_props", root / "no_props"
 
-        def write(file_path: Path, testcases: list[ET.Element]):
-            ts = ET.Element("testsuites")
-            suite = ET.SubElement(ts, "testsuite")
-            for tc in testcases:
-                suite.append(tc)
-            tree = ET.ElementTree(ts)
-            tree.write(file_path, encoding="utf-8", xml_declaration=True)
-
-        def make_tc(
-            name: str,
-            result: str = "",
-            props: dict[str, str] | None = None,
-            file: str = "",
-            line: int = 0,
-        ):
-            tc = ET.Element("testcase", {"name": name})
-            if file:
-                tc.set("file", file)
-            if line:
-                tc.set("line", str(line))
-            if result == "failed":
-                ET.SubElement(tc, "failure", {"message": "failmsg"})
-            elif result == "skipped":
-                ET.SubElement(tc, "skipped", {"message": "skipmsg"})
-            if props:
-                props_el = ET.SubElement(tc, "properties")
-                for k, v in props.items():
-                    ET.SubElement(props_el, "property", {"name": k, "value": v})
-            return tc
+        for d in (dir1, dir2):
+            d.mkdir(parents=True, exist_ok=True)
 
         # File with properties
-        tc1 = make_tc(
-            "tc_with_props",
+        _write_test_xml(
+            dir1 / "test.xml",
+            name="tc_with_props",
             result="failed",
+            file="path1",
+            line=10,
             props={
                 "PartiallyVerifies": "REQ1",
                 "FullyVerifies": "",
@@ -81,16 +90,10 @@ def tmp_xml_dirs(tmp_path: Path) -> Callable[..., tuple[Path, Path, Path]]:
                 "DerivationTechnique": "tech",
                 "Description": "desc",
             },
-            file="path1",
-            line=10,
         )
-        write(dir1 / "test.xml", [tc1])
 
         # File without properties
-        # HINT: Once the assertions in xml_parser are back and active, this should allow us
-        #       to catch that the tests Need to be changed too.
-        tc2 = make_tc("tc_no_props", file="path2", line=20)
-        write(dir2 / "test.xml", [tc2])
+        _write_test_xml(dir2 / "test.xml", name="tc_no_props", file="path2", line=20)
 
         return root, dir1, dir2
 
