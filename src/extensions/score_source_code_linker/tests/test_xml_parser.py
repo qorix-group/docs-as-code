@@ -105,7 +105,7 @@ def tmp_xml_dirs(tmp_path: Path) -> Callable[..., tuple[Path, Path, Path]]:
     test_type="requirements-based",
     derivation_technique="requirements-analysis",
 )
-def test_find_xml_files(tmp_xml_dirs: tuple[Path, Path, Path]):
+def test_find_xml_files(tmp_xml_dirs: Callable[..., tuple[Path, Path, Path]]):
     """Ensure xml files are found as expected if bazel-testlogs is used"""
     root: Path
     dir1: Path
@@ -116,7 +116,7 @@ def test_find_xml_files(tmp_xml_dirs: tuple[Path, Path, Path]):
     assert set(found) == expected
 
 
-def test_find_xml_folder(tmp_xml_dirs: tuple[Path, Path, Path]):
+def test_find_xml_folder(tmp_xml_dirs: Callable[..., tuple[Path, Path, Path]]):
     """Ensure xml files are found as expected if bazel-testlogs is used"""
     root: Path
     root, _, _ = tmp_xml_dirs()
@@ -125,7 +125,9 @@ def test_find_xml_folder(tmp_xml_dirs: tuple[Path, Path, Path]):
     assert found == root
 
 
-def test_find_xml_folder_test_reports(tmp_xml_dirs):
+def test_find_xml_folder_test_reports(
+    tmp_xml_dirs: Callable[..., tuple[Path, Path, Path]],
+):
     # root is the 'tests-report' folder inside tmp_path
     root, _, _ = tmp_xml_dirs(test_folder="tests-report")
     # We pass the PARENT of 'tests-report' as the workspace root
@@ -134,7 +136,9 @@ def test_find_xml_folder_test_reports(tmp_xml_dirs):
     assert found == root
 
 
-def test_find_xml_files_test_reports(tmp_xml_dirs: tuple[Path, Path, Path]):
+def test_find_xml_files_test_reports(
+    tmp_xml_dirs: Callable[..., tuple[Path, Path, Path]],
+):
     """Ensure xml files are found as expected if tests-report is used"""
     root: Path
     dir1: Path
@@ -146,7 +150,7 @@ def test_find_xml_files_test_reports(tmp_xml_dirs: tuple[Path, Path, Path]):
     assert set(found) == expected
 
 
-def test_early_return(tmp_path):
+def test_early_return(tmp_path: Path):
     """
     Ensure that if tests-report & bazel-testlogs is not found,
     we return None for early return inside extension
@@ -200,7 +204,7 @@ def test_parse_properties():
     test_type="requirements-based",
     derivation_technique="requirements-analysis",
 )
-def test_read_test_xml_file(tmp_xml_dirs: tuple[Path, Path, Path]):
+def test_read_test_xml_file(tmp_xml_dirs: Callable[..., tuple[Path, Path, Path]]):
     """Ensure a whole pre-defined xml file is parsed correctly"""
     _: Path
     dir1: Path
