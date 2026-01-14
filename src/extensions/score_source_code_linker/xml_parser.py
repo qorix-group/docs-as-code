@@ -170,12 +170,13 @@ def find_xml_files(dir: Path) -> list[Path]:
             xml_paths.append(Path(os.path.join(root, test_file_name)))
     return xml_paths
 
-def find_test_folder(base_path: Path|None = None) -> Path|None:
+
+def find_test_folder(base_path: Path | None = None) -> Path | None:
     ws_root = base_path if base_path is not None else find_ws_root()
     assert ws_root is not None
-    if os.path.isdir(ws_root/"tests-report"):
-        return ws_root / "tests-report" 
-    if os.path.isdir(ws_root/"bazel-testlogs"):
+    if os.path.isdir(ws_root / "tests-report"):
+        return ws_root / "tests-report"
+    if os.path.isdir(ws_root / "bazel-testlogs"):
         return ws_root / "bazel-testlogs"
     logger.info("could not find tests-report or bazel-testlogs to parse testcases")
     return None

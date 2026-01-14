@@ -43,18 +43,7 @@ jobs:
 
       - name: Prepare bundled consumer report
         if: always()
-        run: |
-          # 1. Create the target directory
-          mkdir -p tests-report
-          
-          # 2. Sync the testlogs to our artifact folder
-          # We use -L to follow the symlink and --include filters 
-          # to only grab the actual results (XMLs and Logs)
-          rsync -amL --include='*/' --include='test.xml' --include='test.log' --exclude='*' bazel-testlogs/ tests-report/
-          
-          # 3. Optional: If your tool prefers the folder name to match the Consumer Tests
-          # you can rename specific subfolders here, but rsync preserves the package paths.
-
+        run: "# 1. Create the target directory\nmkdir -p tests-report\n  #magic___^_^___line\n# 2. Sync the testlogs to our artifact folder\n# We use -L to follow the symlink and --include filters \n# to only grab the actual results (XMLs and Logs)\nrsync -amL --include='*/' --include='test.xml' --include='test.log' --exclude='*' bazel-testlogs/ tests-report/\n  #magic___^_^___line\n# 3. Optional: If your tool prefers the folder name to match the Consumer Tests\n# you can rename specific subfolders here, but rsync preserves the package paths.\n  #magic___^_^___line\n"
       - name: Upload bundled consumer report
         if: always()
         uses: actions/upload-artifact@v4

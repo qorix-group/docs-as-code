@@ -18,7 +18,8 @@ Once we enable those we will need to change the tests
 
 import xml.etree.ElementTree as ET
 from pathlib import Path
-from typing import Any, Callable
+from typing import Any
+from collections.abc import Callable
 
 import pytest
 
@@ -111,6 +112,7 @@ def test_find_xml_files(tmp_xml_dirs: tuple[Path, Path, Path]):
     expected: set[Path] = {dir1 / "test.xml", dir2 / "test.xml"}
     assert set(found) == expected
 
+
 def test_find_xml_folder(tmp_xml_dirs: tuple[Path, Path, Path]):
     """Ensure xml files are found as expected if bazel-testlogs is used"""
     root: Path
@@ -119,6 +121,7 @@ def test_find_xml_folder(tmp_xml_dirs: tuple[Path, Path, Path]):
     assert found is not None
     assert found == root
 
+
 def test_find_xml_folder_test_reports(tmp_xml_dirs):
     # root is the 'tests-report' folder inside tmp_path
     root, _, _ = tmp_xml_dirs(test_folder="tests-report")
@@ -126,6 +129,7 @@ def test_find_xml_folder_test_reports(tmp_xml_dirs):
     found = xml_parser.find_test_folder(base_path=root.parent)
     assert found is not None
     assert found == root
+
 
 def test_find_xml_files_test_reports(tmp_xml_dirs: tuple[Path, Path, Path]):
     """Ensure xml files are found as expected if tests-report is used"""
@@ -145,7 +149,7 @@ def test_early_return(tmp_path):
     we return None for early return inside extension
     """
     # Move the test execution context to a 100% empty folder
-    
+
     found = xml_parser.find_test_folder(tmp_path)
     assert found is None
 
