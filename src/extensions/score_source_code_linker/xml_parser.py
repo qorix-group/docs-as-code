@@ -104,10 +104,16 @@ def read_test_xml_file(file: Path) -> tuple[list[DataOfTestCase], list[str]]:
     for testsuite in root.findall("testsuite"):
         for testcase in testsuite.findall("testcase"):
             case_properties = {}
-            testname = testcase.get("name")
-            assert testname is not None, (
-                f"Testcase: {testcase} does not have a 'name' attribute. "
-                "This is mandatory. This should not happen, something is wrong."
+            testcasename = testcase.get("name", "")
+            testclassname = testcase.get("classname", "")
+            assert testclassname or testcasename, (
+                f"Testcase: {testcase} does not have a 'name' or 'classname' attribute. "
+                "One of which is mandatory. This should not happen, something is wrong."
+            )
+            testname = (
+                "__".join([testclassname, testcasename])
+                if testclassname
+                else testcasename
             )
             test_file = testcase.get("file")
             line = testcase.get("line")
