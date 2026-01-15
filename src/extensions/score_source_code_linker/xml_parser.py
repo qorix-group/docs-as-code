@@ -112,9 +112,6 @@ def read_test_xml_file(file: Path) -> tuple[list[DataOfTestCase], list[str]]:
             )
             if testclassname:
                 testcn = testclassname.split(".")[-1]
-                print("==========================")
-                print(testcn)
-                print("==========================")
                 testname = "__".join([testcn, testcasename])
             else:
                 testname = testcasename
