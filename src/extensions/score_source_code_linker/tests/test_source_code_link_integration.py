@@ -338,7 +338,7 @@ def example_source_link_text_all_ok(sphinx_base_dir: Path):
 def example_test_link_text_all_ok(sphinx_base_dir: Path):
     return {
         "TREQ_ID_1": [
-            DataForTestLink( 
+            DataForTestLink(
                 name="TestRequirementsCoverage__test_system_startup_time",
                 file=Path("src/tests/testfile_2.py"),
                 need="TREQ_ID_1",
