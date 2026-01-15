@@ -110,11 +110,14 @@ def read_test_xml_file(file: Path) -> tuple[list[DataOfTestCase], list[str]]:
                 f"Testcase: {testcase} does not have a 'name' or 'classname' attribute. "
                 "One of which is mandatory. This should not happen, something is wrong."
             )
-            testname = (
-                "__".join([testclassname, testcasename])
-                if testclassname
-                else testcasename
-            )
+            if testclassname:
+                testcn = testclassname.split(".")[-1]
+                print("==========================")
+                print(testcn)
+                print("==========================")
+                testname = "__".join([testcn, testcasename])
+            else:
+                testname = testcasename
             test_file = testcase.get("file")
             line = testcase.get("line")
 
