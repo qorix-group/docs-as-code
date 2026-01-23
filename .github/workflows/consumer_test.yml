@@ -40,10 +40,7 @@ jobs:
           mkdir -p reports
 
       - name: Run Consumer tests
-        run: |
-          set -o pipefail 
-          .venv_docs/bin/python -m pytest -s -v src/tests/ --repo="$CONSUMER" --junitxml="reports/${{ matrix.consumer }}.xml" | tee "reports/${{ matrix.consumer }}.log"
-
+        run: "set -o pipefail \n.venv_docs/bin/python -m pytest -s -v src/tests/ --repo=\"$CONSUMER\" --junitxml=\"reports/${{ matrix.consumer }}.xml\" | tee \"reports/${{ matrix.consumer }}.log\"\n#magic___^_^___line\n"
         env:
           FORCE_COLOR: "1"
           TERM: xterm-256color
