@@ -1,7 +1,7 @@
 (source-code-linker)=
 # Score Source Code Linker
 
-A Sphinx extension for enabling **source code and test traceability** for requirements.  
+A Sphinx extension for enabling **source code and test traceability** for requirements.
 This extension integrates with **Bazel** and **sphinx-needs** to automatically generate traceability links between implementation, tests, and documentation.
 
 ---
@@ -218,10 +218,10 @@ rm -rf _build/
 ## Examples:
 To see working examples for CodeLinks & TestLinks, take a look at the Docs-As-Code documentation.
 
-[Example CodeLink](https://eclipse-score.github.io/docs-as-code/main/requirements/requirements.html#tool_req__docs_common_attr_id_scheme)
-[Example CodeLink](https://eclipse-score.github.io/docs-as-code/main/requirements/requirements.html#tool_req__docs_common_attr_status)
+[Example CodeLink](https://eclipse-score.github.io/docs-as-code/main/internals/requirements/requirements.html#tool_req__docs_common_attr_id_scheme)
+[Example CodeLink](https://eclipse-score.github.io/docs-as-code/main/internals/requirements/requirements.html#tool_req__docs_common_attr_status)
 
-[Example TestLink](https://eclipse-score.github.io/docs-as-code/main/requirements/requirements.html#tool_req__docs_dd_link_source_code_link)
+[Example TestLink](https://eclipse-score.github.io/docs-as-code/main/internals/requirements/requirements.html#tool_req__docs_dd_link_source_code_link)
 
 ## Flow-Overview
 ```{mermaid}
@@ -272,9 +272,9 @@ flowchart TD
         L4[DTFL = DataForTestLink]
         L3[TestCaseNeed Operations]
         L5[DOTC = DataOfTestCase]
-        L1 ~~~ L2 
-        L2 ~~~ L4 
-        L4 ~~~ L3 
+        L1 ~~~ L2
+        L2 ~~~ L4
+        L4 ~~~ L3
         L3 ~~~ L5
     end
 

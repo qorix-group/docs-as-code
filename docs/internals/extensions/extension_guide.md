@@ -44,7 +44,6 @@ Some events also expect a return value.
 For more information, please see the related documentation:
 - [Attaching function signature](https://www.sphinx-doc.org/en/master/extdev/appapi.html#sphinx.application.Sphinx.connect)
 - [Build API events](https://www.sphinx-doc.org/en/master/extdev/event_callbacks.html#core-events-overview)
-- [sphinx-needs events](https://github.com/useblocks/sphinx-needs/blob/master/docs/contributing.rst#structure-of-the-extensions-logic)
 
 ## Adding a New Configuration Value
 
