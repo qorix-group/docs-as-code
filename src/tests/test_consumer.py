@@ -672,5 +672,4 @@ def test_and_clone_repos_updated(sphinx_base_dir: Path, pytestconfig: Config):
     if not overall_success:
         pytest.fail(
             reason="Consumer Tests failed, see table for which commands specifically. "
-            ""
         )
