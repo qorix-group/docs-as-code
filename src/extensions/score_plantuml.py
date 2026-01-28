@@ -30,11 +30,13 @@ from pathlib import Path
 
 from sphinx.application import Sphinx
 from sphinx.util import logging
+from pprint import pprint
 
 logger = logging.getLogger(__name__)
 
 
 def get_runfiles_dir() -> Path:
+    pprint(os.environ)
     if r := os.getenv("RUNFILES_DIR"):
         # Runfiles are only available when running in Bazel.
         # bazel build and bazel run are both supported.
