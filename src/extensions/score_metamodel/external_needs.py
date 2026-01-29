@@ -12,9 +12,7 @@
 # *******************************************************************************
 
 import json
-import os
 import subprocess
-import sys
 from dataclasses import dataclass
 from pathlib import Path
 
@@ -22,6 +20,7 @@ from sphinx.application import Sphinx
 from sphinx.config import Config
 from sphinx.util import logging
 from sphinx_needs.needsfile import NeedsList
+
 from src.find_runfiles import get_runfiles_dir
 
 logger = logging.getLogger(__name__)
@@ -182,8 +181,7 @@ def add_external_docs_sources(e: ExternalNeedsSource, config: Config):
     if "ide_support.runfiles" in str(r):
         logger.error("Combo builds are currently only supported with Bazel.")
         return
-    else:
-        docs_source_path = Path(r) / f"{e.bazel_module}+"
+    docs_source_path = Path(r) / f"{e.bazel_module}+"
 
     if "collections" not in config:
         config.collections = {}
