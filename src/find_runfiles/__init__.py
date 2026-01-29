@@ -27,14 +27,17 @@ def _log_debug(message: str):
         print(message)
 
 
-def find_git_root() -> Path:
-    # TODO: is __file__ ever resolved into the bazel cache directories?
-    # Then this function will not work!
+def find_git_root(starting_path: Path | None = None) -> Path:
+    # 1. Highest priority: Bazel environment variable
     workspace = os.getenv("BUILD_WORKSPACE_DIRECTORY")
     if workspace:
         return Path(workspace)
 
-    for parent in Path(__file__).resolve().parents:
+    # 2. Traversal logic: use starting_path (for tests) or __file__ (for prod)
+    # We resolve it to ensure we aren't dealing with symlinks in the bazel cache
+    current: Path = (starting_path or Path(__file__)).resolve()
+
+    for parent in current.parents:
         if (parent / ".git").exists():
             return parent
 
