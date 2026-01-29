@@ -110,6 +110,7 @@ def get_runfiles_dir() -> Path:
     #     _log_debug("Running outside bazel.")
     #
     #     # TODO: "process-docs" is in SOURCE_DIR!!
-    #     runfiles_dir = git_root / "bazel-bin" / "process-docs" / "ide_support.runfiles"
+    #     runfiles_dir = git_root / "bazel-bin" /
+    #       "process-docs" / "ide_support.runfiles"
     #
     # return runfiles_dir
