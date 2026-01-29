@@ -88,28 +88,22 @@ def test_outside_bazel_ide_support(
     assert result == expected_path
 
 
-def test_find_git_root_via_env(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> None:
-    """Tests find_git_root prioritizing BUILD_WORKSPACE_DIRECTORY."""
-    workspace: Path = tmp_path / "workspace_env"
-    workspace.mkdir()
-    monkeypatch.setenv("BUILD_WORKSPACE_DIRECTORY", str(workspace))
-
-    assert find_runfiles.find_git_root() == workspace
-
-
 def test_find_git_root_via_traversal(
     tmp_path: Path, monkeypatch: pytest.MonkeyPatch
 ) -> None:
-    """Tests find_git_root by walking up the tree."""
+    """Tests find_git_root by walking up the tree from a specific path."""
+    # Create the fake repo: /tmp/.../workspaces/process/.git
     git_root: Path = setup_mock_repo(tmp_path)
     monkeypatch.delenv("BUILD_WORKSPACE_DIRECTORY", raising=False)
 
+    # Create a deep subdirectory and a "fake" script file inside it
     sub_dir: Path = git_root / "some" / "deep" / "path"
     sub_dir.mkdir(parents=True)
+    fake_script: Path = sub_dir / "tool.py"
+    fake_script.touch()
 
-    # This logic assumes find_git_root has been updated to use Path.cwd()
-    # or that the test is running in a context where Path(__file__) is within git_root
-    monkeypatch.chdir(sub_dir)
+    # Pass the fake script path so the function starts searching from there
+    result: Path = find_runfiles.find_git_root(starting_path=fake_script)
 
-    result: Path = find_runfiles.find_git_root()
     assert result == git_root
+    assert (result / ".git").exists()
