@@ -29,7 +29,7 @@ from pathlib import Path
 from sphinx.application import Sphinx
 from sphinx.util import logging
 
-from src.find_runfiles import get_runfiles_dir
+from src.helper_lib import get_runfiles_dir
 
 logger = logging.getLogger(__name__)
 
