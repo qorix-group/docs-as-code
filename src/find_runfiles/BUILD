@@ -24,6 +24,7 @@ py_library(
     name = "find_runfiles",
     srcs = [":all_sources"],
     imports = ["."],
+    deps = ["@rules_python//python/runfiles"],
     visibility = ["//visibility:public"],
 )
 

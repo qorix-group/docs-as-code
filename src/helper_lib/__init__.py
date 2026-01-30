@@ -11,11 +11,22 @@
 # SPDX-License-Identifier: Apache-2.0
 # *******************************************************************************
 
+import sys
 import os
 import subprocess
 from pathlib import Path
 
 from sphinx_needs.logging import get_logger
+
+try:
+    from bazel_runfiles import runfiles
+except ImportError:
+    print("Import error for bazel_runfiles")
+    try:
+        from runfiles import runfiles 
+    except:
+        print("Could not import bazel_runfiles module. even after except", file=sys.stderr)
+        raise
 
 LOGGER = get_logger(__name__)
 
@@ -174,3 +185,55 @@ def get_current_git_hash(git_root: Path) -> str:
             exc_info=e,
         )
         raise
+
+
+# def find_git_root(starting_path: Path | None = None) -> Path:
+#     workspace = os.getenv("BUILD_WORKSPACE_DIRECTORY")
+#     if workspace:
+#         return Path(workspace)
+#     current: Path = (starting_path or Path(__file__)).resolve()
+#     for parent in current.parents:
+#         if (parent / ".git").exists():
+#             return parent
+#     sys.exit(
+#         "Could not find git root. "
+#         + "Please run this script from the root of the repository."
+#     )
+
+
+def get_runfiles_dir() -> Path:
+    """
+    Return the path to the runfiles directory, using Bazel's runfiles library if available.
+    """
+    try:
+        # Create the runfiles object using Bazel's conventions.
+        # This knows about the build/run environment and resolves resources for you.
+        r = runfiles.Create()
+        runfiles_dir = Path(
+            r._directory
+        )  # _directory is the resolved root runfiles dir
+        LOGGER.info(f"Found Bazel runfiles directory: {runfiles_dir}")
+        if not runfiles_dir.exists():
+            raise FileNotFoundError
+        return runfiles_dir
+    except Exception as ex:
+        LOGGER.warning(f"Could not find runfiles via bazel runfiles lib: {ex}")
+        # Fallback mode: check environment or do DIY traversal (legacy)
+        if env_runfiles := os.getenv("RUNFILES_DIR"):
+            runfiles_dir = Path(env_runfiles)
+            LOGGER.info(f"RUNFILES_DIR env: {runfiles_dir}")
+        else:
+            git_root = Path.cwd().resolve()
+            while not (git_root / ".git").exists():
+                git_root = git_root.parent
+                if git_root == Path("/"):
+                    sys.exit("Could not find git root.")
+            runfiles_dir = git_root / "bazel-bin" / "ide_support.runfiles"
+            LOGGER.info(f"RUNFILES_DIR dir: {runfiles_dir}")
+
+        if not runfiles_dir.exists():
+            sys.exit(
+                f"Could not find runfiles_dir at {runfiles_dir}. "
+                + "Have a look at README.md for instructions on how to build docs."
+            )
+        return runfiles_dir
