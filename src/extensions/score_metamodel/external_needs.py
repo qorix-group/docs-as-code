@@ -25,6 +25,7 @@ from src.helper_lib import get_runfiles_dir
 
 logger = logging.getLogger(__name__)
 
+
 @dataclass
 class ExternalNeedsSource:
     bazel_module: str
@@ -142,7 +143,8 @@ def get_external_needs_source(external_needs_source: str) -> list[ExternalNeedsS
         # Path taken for all invocations via `bazel`
         external_needs = parse_external_needs_sources_from_DATA(external_needs_source)
     else:
-        # This is the path taken for anything that doesn't run via `bazel`, e.g. esbonio etc.)
+        # This is the path taken for anything that doesn't
+        # run via `bazel`  e.g. esbonio or other direct executions
         external_needs = parse_external_needs_sources_from_bazel_query()  # pyright: ignore[reportAny]
     return external_needs
 

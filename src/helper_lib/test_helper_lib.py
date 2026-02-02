@@ -268,7 +268,7 @@ def test_git_root_search_success(git_repo: Path, monkeypatch: pytest.MonkeyPatch
     runfiles_dir.mkdir(parents=True)
     os.environ.pop("RUNFILES_DIR", None)
 
-    # Have to monkeypatch in order to allow us to test 
+    # Have to monkeypatch in order to allow us to test
     # the 'else' path inside 'get_runfiles_dir'
     monkeypatch.setattr(Path, "cwd", lambda: docs_dir)
     result = get_runfiles_dir(start_path=docs_dir)
@@ -282,7 +282,7 @@ def test_git_root_search_not_found(tmp_path: Path, monkeypatch: pytest.MonkeyPat
     nowhere = tmp_path / "nowhere"
     nowhere.mkdir(parents=True)
     os.environ.pop("RUNFILES_DIR", None)
-    # Have to monkeypatch in order to allow us to 
+    # Have to monkeypatch in order to allow us to
     # test the 'else' path inside 'get_runfiles_dir'
     monkeypatch.setattr(Path, "cwd", lambda: nowhere)
     with pytest.raises(SystemExit) as excinfo:

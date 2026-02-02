@@ -192,7 +192,7 @@ def get_current_git_hash(git_root: Path) -> str:
 #     )
 
 
-def get_runfiles_dir(start_path:Path|None=None):
+def get_runfiles_dir(start_path: Path | None = None):
     """
     Find the Bazel runfiles directory using bazel_runfiles convention,
     fallback to RUNFILES_DIR or relative traversal if needed.
@@ -200,7 +200,7 @@ def get_runfiles_dir(start_path:Path|None=None):
     # This makes testing much easier
     # if start_path is None:
     #     cwd = Path.cwd()
-    # else: 
+    # else:
     #     cwd = start_path
     if (r := Runfiles.Create()) and (rd := r.EnvVars().get("RUNFILES_DIR")):
         runfiles_dir = Path(rd)
