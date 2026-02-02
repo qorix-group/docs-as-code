@@ -25,7 +25,7 @@ py_library(
     srcs = [":all_sources"],
     imports = ["."],
     visibility = ["//visibility:public"],
-    deps = ["@score_docs_as_code//src/extensions/score_source_code_linker:source_code_linker_helpers"],
+    deps = ["@score_docs_as_code//src/extensions/score_source_code_linker:source_code_linker_helpers", "@rules_python//python/runfiles"],
 )
 
 score_py_pytest(

@@ -21,7 +21,7 @@ from sphinx.config import Config
 from sphinx.util import logging
 from sphinx_needs.needsfile import NeedsList
 
-from src.find_runfiles import get_runfiles_dir
+from src.helper_lib import get_runfiles_dir
 
 logger = logging.getLogger(__name__)
 
