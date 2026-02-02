@@ -11,14 +11,13 @@
 # SPDX-License-Identifier: Apache-2.0
 # *******************************************************************************
 
-import sys
 import os
 import subprocess
+import sys
 from pathlib import Path
 
-from sphinx_needs.logging import get_logger
-
 from python.runfiles import Runfiles
+from sphinx_needs.logging import get_logger
 
 LOGGER = get_logger(__name__)
 
@@ -193,11 +192,16 @@ def get_current_git_hash(git_root: Path) -> str:
 #     )
 
 
-def get_runfiles_dir():
+def get_runfiles_dir(start_path:Path|None=None):
     """
     Find the Bazel runfiles directory using bazel_runfiles convention,
     fallback to RUNFILES_DIR or relative traversal if needed.
     """
+    # This makes testing much easier
+    # if start_path is None:
+    #     cwd = Path.cwd()
+    # else: 
+    #     cwd = start_path
     if (r := Runfiles.Create()) and (rd := r.EnvVars().get("RUNFILES_DIR")):
         runfiles_dir = Path(rd)
     else:
