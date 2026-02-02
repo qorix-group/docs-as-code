@@ -25,7 +25,6 @@ from src.helper_lib import get_runfiles_dir
 
 logger = logging.getLogger(__name__)
 
-
 @dataclass
 class ExternalNeedsSource:
     bazel_module: str
@@ -61,6 +60,7 @@ def parse_external_needs_sources_from_DATA(v: str) -> list[ExternalNeedsSource]:
         return []
 
     logger.debug(f"Parsing external needs sources: {v}")
+
     data = json.loads(v)
 
     res = [res for el in data if (res := _parse_bazel_external_need(el))]
@@ -138,13 +138,12 @@ def extend_needs_json_exporter(config: Config, params: list[str]) -> None:
 
 
 def get_external_needs_source(external_needs_source: str) -> list[ExternalNeedsSource]:
-    bazel = external_needs_source or get_runfiles_dir()
-
-    if bazel:
+    if external_needs_source:
+        # Path taken for all invocations via `bazel`
         external_needs = parse_external_needs_sources_from_DATA(external_needs_source)
     else:
+        # This is the path taken for anything that doesn't run via `bazel`, e.g. esbonio etc.)
         external_needs = parse_external_needs_sources_from_bazel_query()  # pyright: ignore[reportAny]
-
     return external_needs
 
 
@@ -153,7 +152,6 @@ def add_external_needs_json(e: ExternalNeedsSource, config: Config):
     r = get_runfiles_dir()
     json_file = r / json_file_raw
     logger.debug(f"Fixed JSON file path: {json_file_raw} -> {json_file}")
-
     try:
         needs_json_data = json.loads(Path(json_file).read_text(encoding="utf-8"))  # pyright: ignore[reportAny]
     except FileNotFoundError:
