@@ -34,7 +34,7 @@ def setup(app: Sphinx) -> dict[str, str | bool]:
     app.config.needscfg_exclude_defaults = True
     """Exclude default values from the generated configuration."""
 
-    # This is disabled for right now as it causes a lot of issues 
+    # This is disabled for right now as it causes a lot of issues
     # While we are not using the generated file anywhere
     app.config.needscfg_warn_on_diff = False
     """Running Sphinx with -W will fail the CI for uncommitted TOML changes."""
