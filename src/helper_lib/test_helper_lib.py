@@ -271,7 +271,7 @@ def test_git_root_search_success(git_repo: Path, monkeypatch: pytest.MonkeyPatch
     # Have to monkeypatch in order to allow us to test
     # the 'else' path inside 'get_runfiles_dir'
     monkeypatch.setattr(Path, "cwd", lambda: docs_dir)
-    result = get_runfiles_dir(start_path=docs_dir)
+    result = get_runfiles_dir()
     assert Path(result) == runfiles_dir
 
 

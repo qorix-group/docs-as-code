@@ -178,30 +178,12 @@ def get_current_git_hash(git_root: Path) -> str:
         raise
 
 
-# def find_git_root(starting_path: Path | None = None) -> Path:
-#     workspace = os.getenv("BUILD_WORKSPACE_DIRECTORY")
-#     if workspace:
-#         return Path(workspace)
-#     current: Path = (starting_path or Path(__file__)).resolve()
-#     for parent in current.parents:
-#         if (parent / ".git").exists():
-#             return parent
-#     sys.exit(
-#         "Could not find git root. "
-#         + "Please run this script from the root of the repository."
-#     )
-
-
-def get_runfiles_dir(start_path: Path | None = None):
+def get_runfiles_dir():
     """
     Find the Bazel runfiles directory using bazel_runfiles convention,
     fallback to RUNFILES_DIR or relative traversal if needed.
     """
     # This makes testing much easier
-    # if start_path is None:
-    #     cwd = Path.cwd()
-    # else:
-    #     cwd = start_path
     if (r := Runfiles.Create()) and (rd := r.EnvVars().get("RUNFILES_DIR")):
         runfiles_dir = Path(rd)
     else:
