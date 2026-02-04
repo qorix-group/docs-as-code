@@ -153,7 +153,7 @@ def add_external_needs_json(e: ExternalNeedsSource, config: Config):
     json_file_raw = f"{e.bazel_module}+/{e.target}/_build/needs/needs.json"
     r = get_runfiles_dir()
     json_file = r / json_file_raw
-    logger.debug(f"Fixed JSON file path: {json_file_raw} -> {json_file}")
+    logger.debug(f"External needs.json: {json_file}")
     try:
         needs_json_data = json.loads(Path(json_file).read_text(encoding="utf-8"))  # pyright: ignore[reportAny]
     except FileNotFoundError:
