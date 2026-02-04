@@ -178,12 +178,11 @@ def get_current_git_hash(git_root: Path) -> str:
         raise
 
 
-def get_runfiles_dir():
+def get_runfiles_dir() -> Path:
     """
     Find the Bazel runfiles directory using bazel_runfiles convention,
     fallback to RUNFILES_DIR or relative traversal if needed.
     """
-    # This makes testing much easier
     if (r := Runfiles.Create()) and (rd := r.EnvVars().get("RUNFILES_DIR")):
         runfiles_dir = Path(rd)
     else:
@@ -195,11 +194,9 @@ def get_runfiles_dir():
         # But we need to find it first.
         LOGGER.debug("Running outside bazel.")
 
-        git_root = Path.cwd().resolve()
-        while not (git_root / ".git").exists():
-            git_root = git_root.parent
-            if git_root == Path("/"):
-                sys.exit("Could not find git root.")
+        git_root = find_git_root()
+        if git_root is None:
+            sys.exit("Could not find git root.")
 
         runfiles_dir = git_root / "bazel-bin" / "ide_support.runfiles"
 

@@ -249,6 +249,7 @@ def test_runfiles_dir_found(temp_dir: Path):
     os.chdir(runfiles_dir)
     result = get_runfiles_dir()
     assert Path(result) == runfiles_dir
+    os.environ.pop("RUNFILES_DIR", None)
 
 
 def test_runfiles_dir_missing_triggers_exit(temp_dir: Path):
@@ -258,6 +259,7 @@ def test_runfiles_dir_missing_triggers_exit(temp_dir: Path):
     with pytest.raises(SystemExit) as e:
         get_runfiles_dir()
     assert "Could not find runfiles_dir" in str(e.value)
+    os.environ.pop("RUNFILES_DIR", None)
 
 
 def test_git_root_search_success(git_repo: Path, monkeypatch: pytest.MonkeyPatch):
@@ -273,6 +275,7 @@ def test_git_root_search_success(git_repo: Path, monkeypatch: pytest.MonkeyPatch
     monkeypatch.setattr(Path, "cwd", lambda: docs_dir)
     result = get_runfiles_dir()
     assert Path(result) == runfiles_dir
+    os.environ.pop("RUNFILES_DIR", None)
 
 
 def test_git_root_search_not_found(tmp_path: Path, monkeypatch: pytest.MonkeyPatch):
@@ -288,3 +291,4 @@ def test_git_root_search_not_found(tmp_path: Path, monkeypatch: pytest.MonkeyPat
     with pytest.raises(SystemExit) as excinfo:
         get_runfiles_dir()
     assert "Could not find git root" in str(excinfo.value)
+    os.environ.pop("RUNFILES_DIR", None)
