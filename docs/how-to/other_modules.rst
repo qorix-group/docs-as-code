@@ -42,7 +42,7 @@ Example `BUILD` snippet (consumer module):
       source_dir = "docs",
     )
 
-More details in :ref:`bidirectional_traceability`.
+More details in :ref:`docs_bidirectional_traceability`.
 
 3) Reference needs across modules
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

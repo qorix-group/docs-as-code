@@ -1,4 +1,4 @@
-.. _statistics:
+.. _docs_statistics:
 
 Implementation State Statistics
 ================================

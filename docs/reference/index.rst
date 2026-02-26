@@ -1,4 +1,4 @@
-.. _reference:
+.. _docs_reference:
 
 Reference
 =========
