@@ -1,4 +1,4 @@
-.. _bidirectional_traceability:
+.. _docs_bidirectional_traceability:
 
 Bi-directional Traceability
 ===========================

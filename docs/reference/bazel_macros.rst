@@ -1,4 +1,4 @@
-.. _bazel-macros:
+.. _docs_bazel-macros:
 
 Bazel macro: ``docs``
 =====================

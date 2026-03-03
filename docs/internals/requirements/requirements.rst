@@ -1,4 +1,4 @@
-.. _tool_requirements:
+.. _docs_tool_requirements:
 
 =================================
 Tool Requirements
