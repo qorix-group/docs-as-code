@@ -1198,10 +1198,6 @@ rich==14.3.2 \
 roman-numerals==4.1.0 \
     --hash=sha256:1af8b147eb1405d5839e78aeb93131690495fe9da5c91856cb33ad55a7f1e5b2 \
     --hash=sha256:647ba99caddc2cc1e55a51e4360689115551bf4476d90e8162cf8c345fe233c7
-    # via roman-numerals-py
-roman-numerals-py==4.1.0 \
-    --hash=sha256:553114c1167141c1283a51743759723ecd05604a1b6b507225e91dc1a6df0780 \
-    --hash=sha256:f5d7b2b4ca52dd855ef7ab8eb3590f428c0b1ea480736ce32b01fef2a5f8daf9
     # via sphinx
 ruamel-yaml==0.19.1 \
     --hash=sha256:27592957fedf6e0b62f281e96effd28043345e0e66001f97683aa9a40c667c93 \
@@ -1223,9 +1219,9 @@ soupsieve==2.8.3 \
     --hash=sha256:3267f1eeea4251fb42728b6dfb746edc9acaffc4a45b27e19450b676586e8349 \
     --hash=sha256:ed64f2ba4eebeab06cc4962affce381647455978ffc1e36bb79a545b91f45a95
     # via beautifulsoup4
-sphinx==8.2.3 \
-    --hash=sha256:398ad29dee7f63a75888314e9424d40f52ce5a6a87ae88e7071e80af296ec348 \
-    --hash=sha256:4405915165f13521d875a8c29c8970800a0141c14cc5416a38feca4ea5d9b9c3
+sphinx==9.1.0 \
+    --hash=sha256:7741722357dd75f8190766926071fed3bdc211c74dd2d7d4df5404da95930ddb \
+    --hash=sha256:c84fdd4e782504495fe4f2c0b3413d6c2bf388589bb352d439b2a3bb99991978
     # via
     #   -r src/requirements.in
     #   esbonio
@@ -1256,9 +1252,9 @@ sphinx-design==0.7.0 \
     --hash=sha256:d2a3f5b19c24b916adb52f97c5f00efab4009ca337812001109084a740ec9b7a \
     --hash=sha256:f82bf179951d58f55dca78ab3706aeafa496b741a91b1911d371441127d64282
     # via -r src/requirements.in
-sphinx-needs[plotting]==7.0.0 \
-    --hash=sha256:3fa665181c323d0b76f6de0d8565f925f36933e8af4c253d34127755eff07371 \
-    --hash=sha256:7ea120a1127cc532ea4610e814c26824b05d296ce8c2f6d046d5f6ed64d85d0f
+sphinx-needs[plotting]==8.0.0 \
+    --hash=sha256:540c380c074d4088a557ea353e91513bfc1cb7712b10925c13ac9e5ebb7be091 \
+    --hash=sha256:c4336ee0e3c949eff9eb11a14910f7b6b68cb8284d731cfddf97694037337674
     # via
     #   -r src/requirements.in
     #   needs-config-writer

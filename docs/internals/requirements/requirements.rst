@@ -230,14 +230,15 @@ Versioning
 .. tool_req:: Versioning: enforce attribute
    :id: tool_req__docs_common_attr_version
    :tags: Common Attributes
-   :implemented: NO
+   :implemented: PARTIAL
    :parent_covered: NO: to be checked after demo
    :satisfies: gd_req__req_attr_version
 
    Docs-As-Code shall enable and enforce a versioning attribute for all needs.
 
    .. note::
-     Exact nature to be decided, it could e.g. be a number, a string, a semantic version, a date or a hash.
+     Current implementation is handled mainly by sphinx-needs.
+     In our enviroment it supports whole numbers e.g. (1,2,10,34)
 
 
 

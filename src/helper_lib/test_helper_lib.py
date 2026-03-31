@@ -14,6 +14,7 @@ import os
 import subprocess
 import tempfile
 from pathlib import Path
+from typing import Any
 
 import pytest
 
@@ -29,7 +30,7 @@ from src.helper_lib import (
 class _FakeConfig:
     """Minimal stand-in for sphinx.config.Config."""
 
-    def __init__(self, raw: dict):
+    def __init__(self, raw: dict[Any,Any]):
         self._raw_config = raw
 
 
