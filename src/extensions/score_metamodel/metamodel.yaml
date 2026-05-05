@@ -1047,7 +1047,13 @@ graph_checks:
   saf_linkage_safety:
     needs:
       include: feat_saf_fmea, comp_saf_fmea, plat_saf_dfa, feat_saf_dfa, comp_saf_dfa
-      condition: safety == ASIL_B
+      condition:
+        and:
+          - safety == ASIL_B
+          - status == valid
     check:
-      mitigated_by: safety != QM
+      mitigated_by:
+        and:
+          - safety != QM
+          - status == valid
     explanation: An ASIL_B safety requirement must link to a ASIL_B requirement. Please ensure that the linked requirements safety level is not QM and it's status is valid.
