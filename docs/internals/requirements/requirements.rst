@@ -1265,7 +1265,7 @@ Safety Analysis (DFA + FMEA) Process to Tool Requirement Mapping
    :id: tool_req__docs_saf_attrs_root_cause
    :implemented: YES
    :tags: Safety Analysis
-   :version: 1
+   :version: 2
    :satisfies: gd_req__saf_attr_failure_root_cause
    :parent_covered: YES
 
