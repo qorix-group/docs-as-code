@@ -756,7 +756,7 @@ needs_types:
       # req-Id: tool_req__docs_saf_attr_fmea_failure_effect
       failure_effect: ^.+$
       sufficient: ^(yes|no)$
-      status: ^(valid|invalid)$
+      status: ^(draft|valid|invalid)$
       # req-Id: tool_req__docs_common_attr_description
       content: ^[\s\S]+$
     mandatory_links:
@@ -780,7 +780,7 @@ needs_types:
       failure_effect: ^.+$
       # req-Id: tool_req__docs_saf_attrs_sufficient
       sufficient: ^(yes|no)$
-      status: ^(valid|invalid)$
+      status: ^(draft|valid|invalid)$
       # req-Id: tool_req__docs_saf_attrs_content
       # req-Id: tool_req__docs_common_attr_description
       content: ^[\s\S]+$
@@ -812,7 +812,7 @@ needs_types:
       failure_effect: ^.+$
       # req-Id: tool_req__docs_saf_attrs_sufficient
       sufficient: ^(yes|no)$
-      status: ^(valid|invalid)$
+      status: ^(draft|valid|invalid)$
       # req-Id: tool_req__docs_saf_attrs_content
       content: ^[\s\S]+$
     optional_options:
@@ -843,7 +843,7 @@ needs_types:
       failure_effect: ^.+$
       # req-Id: tool_req__docs_saf_attrs_sufficient
       sufficient: ^(yes|no)$
-      status: ^(valid|invalid)$
+      status: ^(draft|valid|invalid)$
       # req-Id: tool_req__docs_saf_attrs_content
       content: ^[\s\S]+$
     optional_options:
@@ -876,7 +876,7 @@ needs_types:
       failure_effect: ^.+$
       # req-Id: tool_req__docs_saf_attrs_sufficient
       sufficient: ^(yes|no)$
-      status: ^(valid|invalid)$
+      status: ^(draft|valid|invalid)$
       # req-Id: tool_req__docs_saf_attrs_content
       content: ^[\s\S]+$
     optional_options:
@@ -1261,6 +1261,8 @@ graph_checks:
 
   # Features/components receive requirements through incoming satisfied_by
   # links. Their optional fulfils links do not replace this allocation.
+  # Views and interfaces link requirements only optionally via fulfils
+  # (tool_req__docs_arch_link_fulfils), so no completeness check applies to them.
   # req-Id: tool_req__docs_arch_link_safety_to_req
   tool_req__docs_allocation_safety_to_req:
     needs:
@@ -1270,14 +1272,12 @@ graph_checks:
       satisfied_by_back: safety != QM
     explanation: A safety relevant feature or component must have at least one safety requirement allocated via satisfied_by.
 
-  # req-Id: tool_req__docs_arch_link_safety_to_req
-  tool_req__docs_arch_link_safety_to_req:
-    needs:
-      include: feat_arc_sta, feat_arc_dyn, logic_arc_int, comp_arc_sta, comp_arc_dyn, real_arc_int
-      condition: safety != QM
-    check_one:
-      fulfils: safety != QM
-    explanation: A safety relevant architecture element must be linked to at least one safety requirement via fulfils.
+
+
+
+
+
+
 
   # req-Id: tool_req__docs_req_arch_link_safety_to_arch
   tool_req__docs_req_arch_link_safety_to_arch:
